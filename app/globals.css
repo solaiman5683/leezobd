@@ -1,0 +1,144 @@
+@import 'keep-react/css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+	@apply mx-auto;
+}
+
+.rs-input {
+	border: none !important;
+	background: transparent !important;
+}
+.rs-input:focus {
+	outline: none !important;
+	border: none !important;
+	background: transparent !important;
+}
+
+.slick-prev {
+	left: -10px;
+	z-index: 10;
+	scale: 1.5;
+}
+.slick-next {
+	right: -10px;
+	z-index: 10;
+	scale: 1.5;
+}
+.slick-prev:before,
+.slick-next:before {
+	color: gray;
+}
+
+.flip-countdown
+	.flip-countdown-piece
+	.flip-countdown-card
+	.flip-countdown-card-sec
+	.card__top {
+	border-bottom: none !important;
+}
+
+.flip-countdown.size-extra-small .flip-countdown-piece .flip-countdown-title {
+	display: none;
+}
+
+/* .flip-countdown
+	.flip-countdown-piece
+	.flip-countdown-card
+	.flip-countdown-card-sec {
+	box-shadow: none !important;
+} */
+
+.rs-picker-popup {
+	z-index: 9999;
+}
+
+.fslightbox-container {
+	top: -24px !important;
+}
+
+#ratings .rs-rate-character {
+	margin-right: 1px;
+}
+#ratings-user.rs-rate-xs {
+	font-size: 14px;
+}
+#ratings-user .rs-rate-character {
+	margin-right: 0 !important;
+}
+
+.flip-countdown.size-extra-small
+	.flip-countdown-piece
+	.flip-countdown-card
+	.flip-countdown-card-sec {
+	@apply text-[13px] sm:text-[16px] lg:text-[20px] !important;
+}
+
+.login-with-qr::after {
+	border-right: 2px solid #ffbf00;
+	border-top: 2px solid #ffbf00;
+	box-sizing: border-box;
+	content: '';
+	height: 0.75rem;
+	position: absolute;
+	right: -0.75rem;
+	top: 50%;
+	transform: rotate(45deg) translateX(-50%);
+	width: 0.75rem;
+	background-color: #fefaec;
+}
+
+#track-package .slick-dots {
+	bottom: -10px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hidden::-webkit-scrollbar {
+	display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hidden {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+#top-slider .slick-prev {
+	left: 10px;
+}
+#top-slider .slick-next {
+	right: 10px;
+}
+#top-slider .slick-dots {
+	bottom: 10px;
+}
+
+#top-slider .slick-prev:before,
+#top-slider .slick-next:before {
+	color: white;
+}
+#top-slider .slick-dots li button::before {
+	color: white;
+}
+
+/* Scrollbar */
+body,
+body * {
+	scrollbar-width: thin; /* For Firefox */
+	scrollbar-color: #888 #f5f5f5; /* For Firefox */
+}
+
+::-webkit-scrollbar {
+	width: 2px; /* Adjust this value to your preference */
+}
+
+::-webkit-scrollbar-track {
+	background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #888;
+	border-radius: 8px; /* Adjust this value to your preference */
+}
