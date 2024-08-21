@@ -11,7 +11,7 @@ const nextConfig = {
             },
             {
                 protocol: "https",
-                hostname: "app.eshoptobd.com",
+                hostname: "app.leezobd.com",
             },
         ],
     },

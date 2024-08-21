@@ -1,7 +1,7 @@
 
 export const TITLE = 'Leezo - Online shopping in bangladesh.';
 
-export const BASE_URL = process.env.BASE_URL || 'https://app.eshoptobd.com';
+export const BASE_URL = process.env.BASE_URL || 'https://app.leezobd.com';
 
 // export const BASE_URL = process.env.BASE_URL || 'http://localhost/ecommerce';
 

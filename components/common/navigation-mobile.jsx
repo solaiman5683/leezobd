@@ -18,11 +18,11 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { BiSolidContact } from "react-icons/bi";
 import {
-  MdContactSupport,
-  MdLogin,
-  MdLogout,
-  MdPersonAddAlt1,
-  MdPrivacyTip,
+    MdContactSupport,
+    MdLogin,
+    MdLogout,
+    MdPersonAddAlt1,
+    MdPrivacyTip,
 } from "react-icons/md";
 import { RiChatPrivateFill } from "react-icons/ri";
 
@@ -167,7 +167,7 @@ const NavigationMobile = () => {
                     <div className="bg-[#212129e1]  text-gray-300 transition-all duration-300">
                       <Link
                         onClick={() => setIsSidebarMenuOpen(false)}
-                        href={"https://app.eshoptobd.com/shops/create"}
+                        href={"https://app.leezobd.com/shops/create"}
                       >
                         <li className="border-b py-2 text-center">
                           Become a Seller
@@ -176,7 +176,7 @@ const NavigationMobile = () => {
                       </Link>
                       <Link
                         onClick={() => setIsSidebarMenuOpen(false)}
-                        href={"https://app.eshoptobd.com/seller/login"}
+                        href={"https://app.leezobd.com/seller/login"}
                       >
                         <li className="flex-1 flex justify-center pb-2 items-center gap-2 mt-1.5">
                           <MdLogin size={19} />
