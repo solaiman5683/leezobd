@@ -4,7 +4,7 @@ module.exports = {
     apps: [
         {
             name: "leezobd",
-            script: "next",
+            script: "yarn",
             args: "start",
         },
     ],
