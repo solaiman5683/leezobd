@@ -22,51 +22,51 @@ const RelatedProducts = () => {
                 </div>
                 <div className="my-2 pr-2">
                     <div className='text-gray-500 text-xs lg:text-sm flex flex-wrap items-center lg:gap-1'>
-                        <Link href='/' className='hover:text-[#F4580E] whitespace-nowrap'>
+                        <Link href='/' className='hover:text-[#4F97A5] whitespace-nowrap'>
                             Shoe casual men
                         </Link>
                         <Divider className='mx-1 lg:w-[2px] bg-gray-600' vertical />
-                        <Link href='/' className='hover:text-[#F4580E] whitespace-nowrap'>
+                        <Link href='/' className='hover:text-[#4F97A5] whitespace-nowrap'>
                             Nivea Men Hydra Max
                         </Link>
                         <Divider className='mx-1 lg:w-[2px] bg-gray-600' vertical />
-                        <Link href='/' className='hover:text-[#F4580E] whitespace-nowrap'>
+                        <Link href='/' className='hover:text-[#4F97A5] whitespace-nowrap'>
                             Nike jordan low dunks
                         </Link>
                         <Divider className='mx-1 lg:w-[2px] bg-gray-600' vertical />
-                        <Link href='/' className='hover:text-[#F4580E] whitespace-nowrap'>
+                        <Link href='/' className='hover:text-[#4F97A5] whitespace-nowrap'>
                             Adidas yeezy static
                         </Link>
                         <Divider className='mx-1 lg:w-[2px] bg-gray-600' vertical />
-                        <Link href='/' className='hover:text-[#F4580E] whitespace-nowrap'>
+                        <Link href='/' className='hover:text-[#4F97A5] whitespace-nowrap'>
                             Adidas yeezy 350 onyx
                         </Link>
                         <Divider className='mx-1 lg:w-[2px] bg-gray-600' vertical />
-                        <Link href='/' className='hover:text-[#F4580E] whitespace-nowrap'>
+                        <Link href='/' className='hover:text-[#4F97A5] whitespace-nowrap'>
                             Nike stefan janoski
                         </Link>
                         <Divider className='mx-1 lg:w-[2px] bg-gray-600' vertical />
-                        <Link href='/' className='hover:text-[#F4580E] whitespace-nowrap'>
+                        <Link href='/' className='hover:text-[#4F97A5] whitespace-nowrap'>
                             sperry shoes
                         </Link>
                         <Divider className='mx-1 lg:w-[2px] bg-gray-600' vertical />
-                        <Link href='/' className='hover:text-[#F4580E] whitespace-nowrap'>
+                        <Link href='/' className='hover:text-[#4F97A5] whitespace-nowrap'>
                             Christmas sweatpants men
                         </Link>
                         <Divider className='mx-1 lg:w-[2px] bg-gray-600' vertical />
-                        <Link href='/' className='hover:text-[#F4580E] whitespace-nowrap'>
+                        <Link href='/' className='hover:text-[#4F97A5] whitespace-nowrap'>
                             dr blet
                         </Link>
                         <Divider className='mx-1 lg:w-[2px] bg-gray-600' vertical />
-                        <Link href='/' className='hover:text-[#F4580E] whitespace-nowrap'>
+                        <Link href='/' className='hover:text-[#4F97A5] whitespace-nowrap'>
                             Nike grey dunks low
                         </Link>
                         <Divider className='mx-1 lg:w-[2px] bg-gray-600' vertical />
-                        <Link href='/' className='hover:text-[#F4580E] whitespace-nowrap'>
+                        <Link href='/' className='hover:text-[#4F97A5] whitespace-nowrap'>
                             New Balance teddy santis
                         </Link>
                         <Divider className='mx-1 lg:w-[2px] bg-gray-600' vertical />
-                        <Link href='/' className='hover:text-[#F4580E] whitespace-nowrap'>
+                        <Link href='/' className='hover:text-[#4F97A5] whitespace-nowrap'>
                             hush puppies shoes for men
                         </Link>
                     </div>

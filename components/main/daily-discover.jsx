@@ -4,11 +4,19 @@ import { getTodayDeals } from "@/hooks/frontend/productApi";
 import ProductItem from "./product-item";
 import { useQuery } from "react-query";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const DailyDiscover = () => {
-  const { data: today_deals, isLoading } = useQuery("today_deals", () =>
-    getTodayDeals()
-  );
+  const [count, setCount] = useState(10);
+  const {
+    data: today_deals,
+    isLoading,
+    refetch,
+  } = useQuery("today_deals", () => getTodayDeals({ count }));
+
+  useEffect(() => {
+    refetch();
+  }, [count, refetch]);
 
   return (
     <div className="relative bg-white">
@@ -35,9 +43,21 @@ const DailyDiscover = () => {
         ))}
       </div>
 
-      <div className="flex justify-center pb-6 pt-4 bg-[#F5F5F5]">
-        <button className="py-4 px-8 border bg-white">Load More</button>
-      </div>
+      {today_deals?.data?.data?.length === 0 && (
+        <div className="flex justify-center items-center h-24">No Data</div>
+      )}
+
+      {today_deals?.data?.data?.length !== 0 &&
+        today_deals?.data?.data?.length % count === 0 && (
+          <div className="flex justify-center items-center h-24">
+            <button
+              className="bg-black text-white p-2 rounded-lg"
+              onClick={() => setCount(count + 10)}
+            >
+              {isLoading ? "Loading" : "Load More"}
+            </button>
+          </div>
+        )}
     </div>
   );
 };

@@ -96,7 +96,7 @@ const ProductNavbarMobile = ({ product }) => {
       >
         <div className="flex items-center gap-4">
          <Link href={'/'}>
-         <div className="text-[#F4580E]">
+         <div className="text-[#4F97A5]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -119,7 +119,7 @@ const ProductNavbarMobile = ({ product }) => {
 
         <div className="flex items-center gap-3">
           <Link href="/cart">
-            <div className="text-[#F4580E]">
+            <div className="text-[#4F97A5]">
               <div
                 className="py-4 px-1 relative border-2 border-transparent rounded-full focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out"
                 aria-label="Cart"
@@ -146,7 +146,7 @@ const ProductNavbarMobile = ({ product }) => {
               </div>
             </div>
           </Link>
-          <div className="text-[#F4580E]">
+          <div className="text-[#4F97A5]">
             <PiDotsThreeOutlineLight size={26} />
           </div>
         </div>

@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { ImCross } from "react-icons/im";
 import image from "/public/pop-up-img1.jpeg";
+import Image from "next/image";
 
 const PopUpModal = () => {
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
@@ -27,15 +27,15 @@ const PopUpModal = () => {
     <div>
       {isEventModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="fixed inset-0 opacity-50"></div>
-          <div className="modal-box relative z-10 rounded-md bg-cover">
-            <div className="absolute z-10 -top-2.5 -right-2.5 shadow-xl flex items-center justify-end">
-              <button onClick={closeModal} className="bg-black flex items-center justify-center px-2 py-2 rounded-full">
-                <ImCross color="white" size={12} />
+          <div className="fixed inset-0 bg-black opacity-50"></div>
+          <div className="modal-box bg-black relative z-10 rounded-md bg-cover">
+            <div className="sticky top-1 right-1 flex items-center justify-end">
+              <button onClick={closeModal} className="hover:text-gray-800 px-4 pt-3">
+                <ImCross color="white" size={18} />
               </button>
             </div>
-            <div className="h-[380px] w-[420px]">
-              <Image src={image} alt="img" className="w-full h-full object-cover object-center" />
+            <div className="h-[370px] w-[380px] pl-2 pr-10 pb-6">
+              <Image src={image} alt="img" className="w-full h-full object-center" />
             </div>
           </div>
         </div>

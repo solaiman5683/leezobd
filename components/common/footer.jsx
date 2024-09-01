@@ -3,7 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { MdOutlineCategory } from "react-icons/md";
 
+import { HiHome } from "react-icons/hi2";
+import { BsChatSquare } from "react-icons/bs";
+import { PiShoppingCart } from "react-icons/pi";
 import FooterMobile from "./footer-mobile";
 
 const Footer = () => {
@@ -44,7 +48,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link href="/" className="text-sm hover:text-gray-700">
-                    Leezo Mall Return & Refund
+                    LeezoBD Mall Return & Refund
                   </Link>
                 </li>
                 <li>
@@ -55,7 +59,7 @@ const Footer = () => {
               </ul>
             </div>
             <div className="space-y-4">
-              <h4 className="font-bold uppercase">ABOUT Leezo</h4>
+              <h4 className="font-bold uppercase">ABOUT LeezoBD</h4>
 
               <ul className="space-y-2">
                 <li>
@@ -65,12 +69,12 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link href="/" className="text-sm hover:text-gray-700">
-                    Leezo Careers
+                    LeezoBD Careers
                   </Link>
                 </li>
                 <li>
                   <Link href="/" className="text-sm hover:text-gray-700">
-                    Leezo Policies
+                    LeezoBD Policies
                   </Link>
                 </li>
                 <li>
@@ -90,7 +94,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link href="/" className="text-sm hover:text-gray-700">
-                    Leezo Seller Mentors
+                    LeezoBD Seller Mentors
                   </Link>
                 </li>
               </ul>
@@ -155,7 +159,7 @@ const Footer = () => {
               </ul>
             </div>
             <div className="space-y-4">
-              <h4 className="font-bold uppercase">Leezo APP DOWNLOAD</h4>
+              <h4 className="font-bold uppercase">LeezoBD APP DOWNLOAD</h4>
 
               <div className="grid grid-cols-2 gap-4 items-center">
                 <div>
@@ -186,7 +190,7 @@ const Footer = () => {
           <div className="border-t-2 p-4">
             <div className="flex justify-between">
               <p>
-                © {new Date().getFullYear()} Leezo. All Rights Reserved .
+                © {new Date().getFullYear()} LeezoBD. All Rights Reserved .
               </p>
               <p className="flex items-center gap-2">
                 <span>Country & Region: </span> <Link href="/">Bangladesh</Link>
@@ -198,7 +202,7 @@ const Footer = () => {
 
       {/* {pathname === "/" ? (
         <div className="lg:hidden">
-          <div className="p-3 shadow-2xl bg-[#F4580E] text-white fixed bottom-0 w-full z-50">
+          <div className="p-3 shadow-2xl bg-[#4F97A5] text-white fixed bottom-0 w-full z-50">
             <ul className="flex justify-between items-center">
               <Link href={"/"}>
                 <li className="flex-1 flex items-center justify-center flex-col">

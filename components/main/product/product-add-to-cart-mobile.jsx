@@ -17,7 +17,7 @@ export function AddToCartMobile({
   buttonName = "Add To Cart",
 }) {
   const [showMobileCart, setShowMobileCart] = useState(false);
-  const [variant, setVariant] = useState(0);
+  const [variant, setVariant] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
 
@@ -30,7 +30,7 @@ export function AddToCartMobile({
     onSuccess: async (data) => {
       if (data?.data?.message) {
         setQuantity(0);
-        setVariant(0);
+        setVariant({});
         setCartHash(data?.data?.temp_user_id);
         toast.success(data?.data?.message);
         setShowMobileCart(false);
@@ -65,7 +65,7 @@ export function AddToCartMobile({
       return;
     }
 
-    if (!variant?.name && product?.colors?.length != 0) {
+    if (!variant) {
       toast.error("Please select variant");
       return;
     }
@@ -80,6 +80,27 @@ export function AddToCartMobile({
       obj.temp_user_id = JSON.parse(localStorage.getItem("cart_hash"));
     }
 
+    const variantSelections = [];
+
+    // Loop through each variant type and join the ids with a hyphen
+    for (const variantType in variant) {
+      const ids = variant[variantType];
+      if (variantType != "color") {
+        variantSelections.push(ids.join("-"));
+      }
+    }
+
+    // add something top of the array
+    if (variant?.["color"] && variant?.["color"]?.length != 0) {
+      variantSelections.unshift(variant?.["color"].join("-"));
+    }
+    // Join all the variant selections with a hyphen
+    const variantString = `${variantSelections.join("-")}`;
+
+    if (variantString) {
+      obj.variant = variantString;
+    }
+
     if (variant?.name) {
       obj.variant = variant?.name;
     }
@@ -89,6 +110,30 @@ export function AddToCartMobile({
 
     mutate(obj);
   };
+
+  const handleVariant = (id, name) => {
+    setVariant((prevState) => {
+      // Create a new object based on the previous state
+      const newVariant = { ...prevState };
+
+      // If the variant type already exists in the state, update the array
+      if (newVariant[id]) {
+        // If the id is already selected, remove it from the array (unselect it)
+        if (newVariant[id].includes(name.toString())) {
+          newVariant[id] = newVariant[id].filter((item) => item !== name);
+        } else {
+          // Otherwise, add the new id to the array (select it)
+          newVariant[id] = [name.toString()];
+        }
+      } else {
+        // If the variant type doesn't exist, create a new array with the id
+        newVariant[id] = [name.toString()];
+      }
+      // Return the updated state
+      return newVariant;
+    });
+  };
+
   return (
     <>
       <button
@@ -135,46 +180,83 @@ export function AddToCartMobile({
               </p>
             </div>
           </div>
-          <div className="py-4 border-b-2 border-dashed">
-            <div>
-              <p className="text-gray-500">Color</p>
-            </div>
-            <div className="">
-              <div className="flex gap-2 text-sm">
-                {product?.colors?.map((color) => (
-                  <button
-                    key={color?.id}
-                    className={`border p-2 flex gap-1 word-break hover:border-orange-500 ${
-                      variant?.id === color?.id && "border-orange-500"
-                    }`}
-                    onClick={() => setVariant(color)}
-                    onMouseOver={() => {
-                      const findIndex = product?.photos?.findIndex(
+
+          {product?.colors?.length != 0 && (
+            <div className="py-4 border-b-2 border-dashed">
+              <div>
+                <p className="text-gray-500">Color</p>
+              </div>
+              <div className="">
+                <div className="flex gap-2 text-sm">
+                  {product?.colors?.map((color) => (
+                    <button
+                      key={color?.id}
+                      className={`border p-2 flex gap-1 word-break hover:border-orange-500 ${
+                        variant?.["color"] &&
+                        variant?.["color"]?.length != 0 &&
+                        variant?.["color"] == color?.name &&
+                        "border-orange-500"
+                      }`}
+                      onClick={() => handleVariant("color", color?.name)}
+                      onMouseOver={() => {
+                        const findIndex = product?.photos?.findIndex(
+                          (photo) => photo?.variant == color?.name
+                        );
+                        if (findIndex != -1) setActiveImage(findIndex);
+                      }}
+                    >
+                      {product?.photos?.filter(
                         (photo) => photo?.variant == color?.name
-                      );
-                      if (findIndex != -1) setActiveImage(findIndex);
-                    }}
-                  >
-                    {product?.photos?.filter(
-                      (photo) => photo?.variant == color?.name
-                    )?.[0] && (
-                      <Image
-                        width={25}
-                        height={25}
-                        src={
-                          product?.photos?.filter(
-                            (photo) => photo?.variant == color?.name
-                          )?.[0]?.path
-                        }
-                        alt=""
-                      />
-                    )}
-                    {color?.name}
-                  </button>
-                ))}
+                      )?.[0] && (
+                        <Image
+                          width={25}
+                          height={25}
+                          src={
+                            product?.photos?.filter(
+                              (photo) => photo?.variant == color?.name
+                            )?.[0]?.path
+                          }
+                          alt=""
+                        />
+                      )}
+                      {color?.name}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          )}
+
+          {product?.choice_options?.length != 0
+            ? product?.choice_options?.map((choice, key) => (
+                <div
+                  key={key}
+                  className="grid grid-cols-4 items-center gap-4 mt-4"
+                >
+                  <div>
+                    <p className="text-gray-500">{choice?.title}</p>
+                  </div>
+                  <div className="col-span-3">
+                    <div className="flex gap-2 text-sm">
+                      {choice?.options.map((option) => (
+                        <button
+                          onClick={() => handleVariant(choice?.name, option)}
+                          key={option}
+                          className={`border px-4 py-1 flex gap-2 ${
+                            variant?.[choice?.name] &&
+                            variant?.[choice?.name]?.length != 0 &&
+                            variant?.[choice?.name] == option &&
+                            "border-orange-500 text-[#4F97A5]"
+                          }`}
+                        >
+                          {option}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))
+            : null}
           <div className="flex items-center justify-between py-4 border-b-2 border-dashed">
             <div>
               <p className="text-gray-500">Quantity</p>

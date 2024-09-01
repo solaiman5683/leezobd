@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import React from "react";
 import { BsChatSquare } from "react-icons/bs";
 import { HiHome } from "react-icons/hi2";
 import { MdOutlineCategory } from "react-icons/md";
@@ -18,7 +19,7 @@ const FooterMobile = () => {
     <div>
       {validPaths.includes(pathname) && (
         <div className="lg:hidden">
-          <div className="p-3 shadow-2xl bg-[#F4580E] text-white fixed bottom-0 w-full z-50">
+          <div className="p-3 shadow-2xl bg-[#4F97A5] text-white fixed bottom-0 w-full z-50">
             <ul className="flex justify-between items-center">
               <Link href={"/"}>
                 <li className="flex-1 flex items-center justify-center flex-col">

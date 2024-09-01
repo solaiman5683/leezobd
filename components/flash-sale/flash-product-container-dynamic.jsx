@@ -3,15 +3,11 @@ import { useQuery } from "react-query";
 import { getBestSellingProducts } from "@/hooks/frontend/productApi";
 import ProductItem from "../main/product-item";
 
-const FlashProductContainer = () => {
-  const { data: flash_deals, isLoading } = useQuery(
-    "getBestSellingProducts",
-    () => getBestSellingProducts()
-  );
+const FlashProductContainerDynamic = ({ products }) => {
   return (
     <div className="container lg:bg-transparent">
-      <div className="grid lg:grid-cols-6 grid-cols-2 lg:gap-6 gap-2">
-        {flash_deals?.data?.data?.map((flash) => (
+      <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-6 gap-2">
+        {products?.map((flash) => (
           <ProductItem
             key={flash?.id}
             id={flash?.id}
@@ -27,4 +23,4 @@ const FlashProductContainer = () => {
   );
 };
 
-export default FlashProductContainer;
+export default FlashProductContainerDynamic;

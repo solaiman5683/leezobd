@@ -3,7 +3,7 @@ import { Breadcrumb } from "keep-react";
 import Link from "next/link";
 
 const ProductSpecifications = ({ product }) => {
-  console.log(product);
+  // console.log(product);
   return (
     <div className="bg-white shadow p-6 rounded space-y-6">
       <h3 className="bg-gray-50 p-4">Product Specifications</h3>
@@ -13,7 +13,7 @@ const ProductSpecifications = ({ product }) => {
           <Breadcrumb
             icon={
               <Link href="/" className="text-sm !text-black">
-                Leezo
+                LeezoBD
               </Link>
             }
             className="max-w-full -ml-3"

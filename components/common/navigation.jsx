@@ -3,14 +3,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
 import CartContainer from "./cart-container";
 import SearchBox from "./search-box";
+import { GrClose, GrContactInfo } from "react-icons/gr";
 import TopNavigation from "./top-navigation";
+import { useEffect, useState } from "react";
+import { FaBars } from "react-icons/fa6";
+import { HiHome } from "react-icons/hi2";
 
+import {
+  MdContactSupport,
+  MdLogin,
+  MdLogout,
+  MdPersonAddAlt1,
+  MdPrivacyTip,
+} from "react-icons/md";
+import { RiChatPrivateFill } from "react-icons/ri";
+import { signOut, useSession } from "next-auth/react";
 import { setToken } from "@/hooks/auth/useAuth";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Avatar } from "keep-react";
 import NavigationMobile from "./navigation-mobile";
 
 const Navigation = () => {
@@ -35,7 +47,7 @@ const Navigation = () => {
             className={`${
               isFlashSale
                 ? "bg-[#2646e7]"
-                : "bg-nav-background-gradient bg-[#F4580E]"
+                : "bg-nav-background-gradient bg-[#4F97A5]"
             } text-white ${pathname === "/" && ""} shadow py-2 `}
           >
             <div className="container">
@@ -46,7 +58,7 @@ const Navigation = () => {
           <div className="flex justify-between items-center container py-3">
             <Link href="/" className="text-[35px] font-bold">
               <Image
-                src="/image/logo.png"
+                src="/image/logo-white.png"
                 alt=""
                 width={150}
                 height={50}

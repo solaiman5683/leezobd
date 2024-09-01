@@ -23,7 +23,7 @@ function ChatBox() {
       {!isChatOpen && (
         <button
           onClick={() => setIsChatOpen(!isChatOpen)}
-          className="bg-white px-4 py-2 text-[#F4580E] flex items-center gap-2 rounded-full shadow-md"
+          className="bg-white px-4 py-2 text-[#4F97A5] flex items-center gap-2 rounded-full shadow-md"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

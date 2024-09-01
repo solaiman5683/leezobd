@@ -45,7 +45,7 @@ const ProductSpecificationMobile = ({ product }) => {
 
       <button
         onClick={handleToggleContent}
-        className="w-full bg-white p-2 flex justify-center items-center gap-2 border-t text-sm text-[#F4580E]"
+        className="w-full bg-white p-2 flex justify-center items-center gap-2 border-t text-sm text-[#4F97A5]"
       >
         {showFullContent ? (
           <>

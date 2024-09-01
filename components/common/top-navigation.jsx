@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
+import { removeToken } from "@/hooks/auth/useAuth";
+import { Avatar } from "keep-react";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -11,18 +13,24 @@ const TopNavigation = ({ session }) => {
   const router = useRouter();
 
   return (
-    <div className="flex justify-between items-center p-3 text-sm bg-[#F4580E]">
+    <div className="flex justify-between items-center p-3 text-sm bg-[#4F97A5]">
       <div className="flex items-center gap-4">
         <ul className="flex items-center ">
           <li className="border-r border-dashed">
-            <Link href="/" className="hover:text-gray-200 px-4">
+            <a
+              href="https://app.leezobd.com/seller/login"
+              className="hover:text-gray-200 px-4"
+            >
               Seller Center
-            </Link>
+            </a>
           </li>
           <li className="border-r border-dashed">
-            <Link href="/" className="hover:text-gray-200 px-4">
+            <a
+              href="https://app.leezobd.com/shops/create"
+              className="hover:text-gray-200 px-4"
+            >
               Start Selling
-            </Link>
+            </a>
           </li>
           <li className="border-r border-dashed">
             <Link href="/" className="hover:text-gray-200 px-4">
@@ -117,7 +125,7 @@ const TopNavigation = ({ session }) => {
               <li>
                 <Link
                   href="/account/my-account"
-                  className="px-4 py-2 block hover:bg-slate-50 hover:text-[#F4580E]"
+                  className="px-4 py-2 block hover:bg-slate-50 hover:text-[#4F97A5]"
                 >
                   My Account
                 </Link>
@@ -125,7 +133,7 @@ const TopNavigation = ({ session }) => {
               <li>
                 <Link
                   href="/account/my-purchase"
-                  className="px-4 py-2 block hover:bg-slate-50 hover:text-[#F4580E]"
+                  className="px-4 py-2 block hover:bg-slate-50 hover:text-[#4F97A5]"
                 >
                   My Purchase
                 </Link>
@@ -137,9 +145,10 @@ const TopNavigation = ({ session }) => {
                     signOut({
                       redirect: false,
                     });
+                    removeToken();
                     router.push("/auth/login");
                   }}
-                  className="px-4 py-2 block hover:bg-slate-50 hover:text-[#F4580E]"
+                  className="px-4 py-2 block hover:bg-slate-50 hover:text-[#4F97A5]"
                 >
                   Logout
                 </button>

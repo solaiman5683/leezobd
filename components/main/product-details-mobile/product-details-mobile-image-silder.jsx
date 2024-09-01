@@ -23,7 +23,7 @@ const ProductDetailsMobileImageSlider = ({ photos }) => {
       setActiveIndex(next);
     },
   };
-  
+
   const variationSettings = {
     dots: false,
     infinite: false,
@@ -63,33 +63,24 @@ const ProductDetailsMobileImageSlider = ({ photos }) => {
           </Slider>
         )}
         <p className="absolute bottom-4 right-4 text-xs px-3 py-1 bg-white/75 rounded-full flex items-center justify-center">
-          ({activeIndex + 1}/{photos.length})
+          ({activeIndex + 1}/{photos?.length})
         </p>
       </div>
       <div className="p-2 space-y-3">
-        <p>{photos.length} Variations Available</p>
-        <Slider {...variationSettings}>
-          {photos.map((item, i) => (
-            <div
-              key={i}
-              onClick={() => {
-                sliderRef.current.slickGoTo(i);
-                setActiveIndex(i);
-              }}
-              className={`px-2 cursor-pointer group focus:outline-none`}
-            >
-              <Image
-                src={item?.path}
-                alt=""
-                width={200}
-                height={200}
-                className={`border-2 group-hover:border-red-500 h-20 w-full object-cover ${
-                  activeIndex === i ? "border-red-500" : "border-transparent"
-                }`}
-              />
-            </div>
-          ))}
-        </Slider>
+        <p>{photos?.length} Variations Available</p>
+        {photos && photos?.length != 0 ? (
+          <Slider {...variationSettings}>
+            {photos?.map((item, i) => (
+              <div key={i} onClick={() => sliderRef.current.slickGoTo(i)}>
+                <img
+                  src={item?.path}
+                  className="w-full h-full object-cover"
+                  alt={`Product image ${i + 1}`}
+                />
+              </div>
+            ))}
+          </Slider>
+        ) : null}
       </div>
     </div>
   );

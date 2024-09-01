@@ -4,27 +4,28 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { GrClose } from "react-icons/gr";
-import { TiMinus, TiPlus } from "react-icons/ti";
 import CartContainer from "./cart-container";
 import SearchBox from "./search-box";
+import { GrClose, GrContactInfo } from "react-icons/gr";
+import { TiMinus, TiPlus } from "react-icons/ti";
 
 import { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa6";
 import { HiHome } from "react-icons/hi2";
 
-import { setToken } from "@/hooks/auth/useAuth";
-import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { BiSolidContact } from "react-icons/bi";
 import {
-    MdContactSupport,
-    MdLogin,
-    MdLogout,
-    MdPersonAddAlt1,
-    MdPrivacyTip,
+  MdContactSupport,
+  MdLogin,
+  MdLogout,
+  MdPersonAddAlt1,
+  MdPrivacyTip,
 } from "react-icons/md";
 import { RiChatPrivateFill } from "react-icons/ri";
+import { signOut, useSession } from "next-auth/react";
+import { removeToken, setToken } from "@/hooks/auth/useAuth";
+import { useRouter } from "next/navigation";
+import { Avatar } from "keep-react";
+import { BiSolidContact } from "react-icons/bi";
 
 const NavigationMobile = () => {
   const [isSidebarMenuOpen, setIsSidebarMenuOpen] = useState(false);
@@ -62,7 +63,7 @@ const NavigationMobile = () => {
               />
               <Link href="/" className="text-[28px] font-bold pl-10">
                 <Image
-                  src="/image/logo.png"
+                  src="/image/logo-white.png"
                   alt=""
                   width={150}
                   height={50}
@@ -102,17 +103,17 @@ const NavigationMobile = () => {
                 <div className="flex items-center gap-1">
                   <GrClose
                     onClick={() => setIsSidebarMenuOpen(false)}
-                    fontSize={26}
+                    fontSize={35}
                     className="font-bold primary-color cursor-pointer "
                   />
-                  {/* <div className="bg-gray-300 h-1 w-full"></div> */}
+                  <div className="bg-gray-300 h-1 w-full"></div>
                 </div>
 
                 <Link href="/" className="text-[28px] font-bold">
-                  <h1>Leezo</h1>
+                  <h1>LeezoBD</h1>
                 </Link>
 
-                <ul className="flex flex-col gap-3">
+                <ul className="shadow-md flex flex-col gap-3">
                   <Link onClick={() => setIsSidebarMenuOpen(false)} href={"/"}>
                     <li className="flex-1 px-3 flex items-center gap-2">
                       <HiHome size={22} />
@@ -193,6 +194,7 @@ const NavigationMobile = () => {
                           signOut({
                             redirect: false,
                           });
+                          removeToken();
                           router.push("/auth/login");
                         }}
                         className="font-semibold mx-3 border flex items-center justify-center gap-2 py-2 mb-5 mt-3 text-sm rounded-md bottom-5 left-6 w-[150px]"

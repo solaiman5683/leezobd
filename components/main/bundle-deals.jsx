@@ -15,7 +15,7 @@ const BundleDeals = () => {
       <div className="flex items-center justify-between">
         <div className="flex gap-4 items-center">
           <h4 className="text-lg lg:font-semibold">Bundle Deals</h4>
-          <button className="lg:px-4 lg:py-1 p-1 border border-orange-500 text-[#F4580E] lg:text-sm text-[8px]">
+          <button className="lg:px-4 lg:py-1 p-1 border border-orange-500 text-[#4F97A5] lg:text-sm text-[8px]">
             Any 2 enjoy $0.20 off
           </button>
         </div>

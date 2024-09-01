@@ -39,9 +39,10 @@ const ProductGallery = ({ images, activeImage, setActiveImage }) => {
     <div className="space-y-6">
       <Image
         src={
-          images[activeImage]?.path
+          (images?.[activeImage]?.path
             ? images[activeImage]?.path
-            : images[activeImage]
+            : images?.[activeImage]) ||
+          '/'
         }
         onClick={() => openLightboxOnSlide(activeImage)}
         alt=""
@@ -50,48 +51,52 @@ const ProductGallery = ({ images, activeImage, setActiveImage }) => {
         className="h-[500px] w-full object-cover cursor-pointer"
       />
 
-      <Slider {...settings}>
-        {images.map((item, i) => (
-          <div
-            key={i}
-            onMouseOver={() => setActiveImage(i)}
-            onClick={() => {
-              setActiveImage(i);
-              openLightboxOnSlide(i);
-            }}
-            className={`px-2 cursor-pointer group focus:outline-none`}
-          >
-            <Image
-              src={item?.path ? item?.path : item}
-              alt=""
-              width={1000}
-              height={1000}
-              className={`border-2 group-hover:border-red-500 h-24 w-full object-cover ${
-                activeImage === i ? "border-red-500" : "border-transparent"
-              }`}
-            />
-          </div>
-        ))}
-      </Slider>
+      {images && images?.length != 0 && (
+        <Slider {...settings}>
+          {images.map((item, i) => (
+            <div
+              key={i}
+              onMouseOver={() => setActiveImage(i)}
+              onClick={() => {
+                setActiveImage(i);
+                openLightboxOnSlide(i);
+              }}
+              className={`px-2 cursor-pointer group focus:outline-none`}
+            >
+              <Image
+                src={item?.path ? item?.path : item}
+                alt=""
+                width={1000}
+                height={1000}
+                className={`border-2 group-hover:border-red-500 h-24 w-full object-cover ${
+                  activeImage === i ? "border-red-500" : "border-transparent"
+                }`}
+              />
+            </div>
+          ))}
+        </Slider>
+      )}
 
-      <FsLightbox
-        toggler={lightboxController.toggler}
-        sources={images.map((item, i) => (
-          <div
-            key={i}
-            className={`px-2 cursor-pointer group focus:outline-none`}
-          >
-            <Image
-              src={item?.path ? item?.path : item}
-              alt=""
-              width={1000}
-              height={1000}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        ))}
-        slide={lightboxController.slide}
-      />
+      {images && images?.length != 0 && (
+        <FsLightbox
+          toggler={lightboxController.toggler}
+          sources={images.map((item, i) => (
+            <div
+              key={i}
+              className={`px-2 cursor-pointer group focus:outline-none`}
+            >
+              <Image
+                src={item?.path ? item?.path : item}
+                alt=""
+                width={1000}
+                height={1000}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+          slide={lightboxController.slide}
+        />
+      )}
     </div>
   );
 };

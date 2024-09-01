@@ -41,7 +41,7 @@ function SameShopProductsMobile() {
                     <div className="min-w-[150px] max-w-[180px]">
                         <ProductItem image='/image/product/3.jpeg' price={24} sold={112} />
                     </div>
-                    <div className="min-w-[150px] max-w-[180px] text-[#F4580E] flex items-center justify-center">
+                    <div className="min-w-[150px] max-w-[180px] text-[#4F97A5] flex items-center justify-center">
                         <Link href='/' className=' h-fit  text-center flex flex-col items-center p-4'>
                             <IoIosArrowDropright size={35} />
                             <p className=' min-w-max'>See More</p>

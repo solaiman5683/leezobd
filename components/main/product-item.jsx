@@ -22,7 +22,7 @@ const ProductItem = ({
             alt=""
             width={500}
             height={500}
-            className="w-full h-full object-center"
+            className="w-full h-full object-center object-contain"
           />
         </div>
         {discount && (

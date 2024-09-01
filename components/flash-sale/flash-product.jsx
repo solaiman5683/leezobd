@@ -53,7 +53,7 @@ const FlashSaleProduct = ({ flash }) => {
                   y2="16"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stopColor="#F4580E"></stop>
+                  <stop stopColor="#4F97A5"></stop>
                   <stop offset="1" stopColor="#FF7337"></stop>
                 </linearGradient>
               </defs>

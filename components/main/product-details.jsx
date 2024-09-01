@@ -7,18 +7,19 @@ import { NumberInput } from "keep-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Minus, Plus } from "phosphor-react";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { Minus, Plus, Spinner } from "phosphor-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { BsCartPlus, BsShieldFillCheck } from "react-icons/bs";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { FaArrowAltCircleDown, FaRegHeart } from "react-icons/fa";
 import {
-    FaFacebook,
-    FaFacebookMessenger,
-    FaPinterest,
-    FaXTwitter,
+  FaFacebook,
+  FaFacebookMessenger,
+  FaPinterest,
+  FaXTwitter,
 } from "react-icons/fa6";
 import { RiSecurePaymentLine } from "react-icons/ri";
 import { useMutation, useQueryClient } from "react-query";
@@ -36,7 +37,7 @@ const sizes = [39, 40, 41, 42, 43, 44];
 
 const ProductDetails = ({ product }) => {
   const [activeImage, setActiveImage] = useState(0);
-  const [variant, setVariant] = useState(0);
+  const [variant, setVariant] = useState({});
   const [selectedSize, setSelectedSize] = useState(sizes[0]);
   const [quantity, setQuantity] = useState(0);
   const params = useSearchParams();
@@ -52,7 +53,7 @@ const ProductDetails = ({ product }) => {
       if (data?.data?.message) {
         toast.success(data?.data?.message);
         setQuantity(0);
-        setVariant(0);
+        setVariant({});
         setCartHash(data?.data?.temp_user_id);
         // refetch query for cart count with query id: cart_count
         queryClient.invalidateQueries("cart_count");
@@ -86,7 +87,7 @@ const ProductDetails = ({ product }) => {
       return;
     }
 
-    if (!variant?.name && product?.colors?.length != 0) {
+    if (!variant) {
       toast.error("Please select variant");
       return;
     }
@@ -101,14 +102,57 @@ const ProductDetails = ({ product }) => {
       obj.temp_user_id = JSON.parse(localStorage.getItem("cart_hash"));
     }
 
-    if (variant?.name) {
-      obj.variant = variant?.name;
+    const variantSelections = [];
+
+    // Loop through each variant type and join the ids with a hyphen
+    for (const variantType in variant) {
+      const ids = variant[variantType];
+      if (variantType != "color") {
+        variantSelections.push(ids.join("-"));
+      }
     }
+
+    // add something top of the array
+    if (variant?.["color"] && variant?.["color"]?.length != 0) {
+      variantSelections.unshift(variant?.["color"].join("-"));
+    }
+    // Join all the variant selections with a hyphen
+    const variantString = `${variantSelections.join("-")}`;
+
+    if (variantString) {
+      obj.variant = variantString;
+    }
+
     if (session?.data?.user) {
       obj.user_id = session.data?.user?.id;
     }
+
     mutate(obj);
   };
+
+  const handleVariant = (id, name) => {
+    setVariant((prevState) => {
+      // Create a new object based on the previous state
+      const newVariant = { ...prevState };
+
+      // If the variant type already exists in the state, update the array
+      if (newVariant[id]) {
+        // If the id is already selected, remove it from the array (unselect it)
+        if (newVariant[id].includes(name.toString())) {
+          newVariant[id] = newVariant[id].filter((item) => item !== name);
+        } else {
+          // Otherwise, add the new id to the array (select it)
+          newVariant[id] = [name.toString()];
+        }
+      } else {
+        // If the variant type doesn't exist, create a new array with the id
+        newVariant[id] = [name.toString()];
+      }
+      // Return the updated state
+      return newVariant;
+    });
+  };
+
   return (
     <div className="bg-white shadow p-6 rounded">
       <div className="grid grid-cols-5 gap-6">
@@ -187,7 +231,7 @@ const ProductDetails = ({ product }) => {
                       245 sold in Singapore <br />
                       288 sold globally* <br />
                       *This product is also sold in other regions on{" "}
-                      <strong>Leezo</strong> platform
+                      <strong>LeezoBD</strong> platform
                     </Tooltip>
                   }
                 >
@@ -265,7 +309,7 @@ const ProductDetails = ({ product }) => {
               <div className="p-4">
                 <div className="flex gap-3 items-center">
                   <p className="text-gray-400 line-through">$26.16</p>
-                  <h5 className="text-2xl text-[#F4580E]">$16.35</h5>
+                  <h5 className="text-2xl text-[#4F97A5]">$16.35</h5>
                   <p className="bg-orange-500 px-2 py-0.5 text-xs text-white">
                     61% off
                   </p>
@@ -273,7 +317,7 @@ const ProductDetails = ({ product }) => {
                 <div className="flex gap-3 items-center my-3 text-red-500">
                   <BsShieldFillCheck size={20} />
                   <div className="space-y-1">
-                    <p className="text-sm">Leezo Mall | 100% Authentic</p>
+                    <p className="text-sm">LeezoBD Mall | 100% Authentic</p>
                     <p className="text-xs text-gray-500">
                       Guaranteed Authentic or 2x Money Back
                     </p>
@@ -286,11 +330,11 @@ const ProductDetails = ({ product }) => {
               <p className="text-gray-400 line-through">
                 {product?.stroked_price}
               </p>
-              <h5 className="text-xl text-[#F4580E]">
-                {product.price_high_low}
+              <h5 className="text-xl text-[#4F97A5]">
+                {product?.price_high_low}
               </h5>
               <p className="bg-orange-500 px-2 py-0.5 text-xs text-white">
-                {product.discount}
+                {product?.discount}
               </p>
             </div>
           )}
@@ -343,7 +387,7 @@ const ProductDetails = ({ product }) => {
                     fillRule="evenodd"
                     clipRule="evenodd"
                     d="M13 26C20.1797 26 26 20.1797 26 13C26 5.8203 20.1797 0 13 0C5.8203 0 0 5.8203 0 13C0 20.1797 5.8203 26 13 26ZM6.31711 9.19194L10.2387 6.09101C10.5429 5.85045 10.9807 6.12114 10.9036 6.50211L10.447 8.75904H14.3137C18.8627 8.75904 20 12.506 20 14.3795C20 16.253 18.8627 20 14.3137 20H9.97449C9.35606 20 8.8548 19.4967 8.8548 18.8759C8.8548 18.2551 9.35614 17.7518 9.97457 17.7518H14.3137C15.0718 17.7518 17.7255 17.0774 17.7255 14.3795C17.7255 11.6817 15.0718 11.0072 14.3137 11.0072H10.447L10.8787 12.8562C10.9661 13.2306 10.5456 13.5145 10.2332 13.2921L6.35075 10.5291C5.89747 10.2066 5.88063 9.53709 6.31711 9.19194Z"
-                    fill="#F4580E"
+                    fill="#4F97A5"
                   />
                 </svg>
                 <p>Free Returns</p>
@@ -389,7 +433,7 @@ const ProductDetails = ({ product }) => {
                 <p className="text-gray-500">Bundle Deals</p>
               </div>
               <div className="col-span-3">
-                <button className="px-4 py-1 border border-orange-500 text-[#F4580E]">
+                <button className="px-4 py-1 border border-orange-500 text-[#4F97A5]">
                   Any 2 enjoy $0.20 off
                 </button>
               </div>
@@ -461,7 +505,7 @@ const ProductDetails = ({ product }) => {
                               <div className="flex justify-between gap-12">
                                 <p className="min-w-max">Doorstep Delivery</p>
                                 <p>
-                                  <span className="text-[#F4580E]">$0.00</span>
+                                  <span className="text-[#4F97A5]">$0.00</span>
                                 </p>
                               </div>
                             </div>
@@ -469,7 +513,7 @@ const ProductDetails = ({ product }) => {
                         }
                       >
                         <p className="flex items-center gap-2">
-                          <span className="hover:text-[#F4580E]">$0.00</span>{" "}
+                          <span className="hover:text-[#4F97A5]">$0.00</span>{" "}
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             enableBackground="new 0 0 11 11"
@@ -542,7 +586,7 @@ const ProductDetails = ({ product }) => {
                         }
                       >
                         <p className="flex items-center gap-2">
-                          <span className="hover:text-[#F4580E]">
+                          <span className="hover:text-[#4F97A5]">
                             {" "}
                             {product?.shipping_type == "free"
                               ? "Free"
@@ -571,67 +615,79 @@ const ProductDetails = ({ product }) => {
             </div>
           )}
 
-          <div className="grid grid-cols-4 items-center gap-4">
-            <div>
-              <p className="text-gray-500">Color</p>
-            </div>
-            <div className="col-span-3">
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                {product?.colors?.map((color) => (
-                  <button
-                    key={color?.id}
-                    className={`border p-2 flex gap-1 word-break hover:border-orange-500 ${
-                      variant?.id === color?.id && "border-orange-500"
-                    }`}
-                    onClick={() => setVariant(color)}
-                    onMouseOver={() => {
-                      const findIndex = product?.photos?.findIndex(
+          {product?.colors?.length != 0 && (
+            <div className="grid grid-cols-4 items-center gap-4">
+              <div>
+                <p className="text-gray-500">Color</p>
+              </div>
+              <div className="col-span-3">
+                <div className="grid grid-cols-2 gap-2 text-sm">
+                  {product?.colors?.map((color) => (
+                    <button
+                      key={color?.id}
+                      className={`border p-2 flex gap-1 word-break hover:border-orange-500 ${
+                        variant?.["color"] &&
+                        variant?.["color"]?.length != 0 &&
+                        variant?.["color"] == color?.name &&
+                        "border-orange-500"
+                      }`}
+                      onClick={() => handleVariant("color", color?.name)}
+                      onMouseOver={() => {
+                        const findIndex = product?.photos?.findIndex(
+                          (photo) => photo?.variant == color?.name
+                        );
+                        if (findIndex != -1) setActiveImage(findIndex);
+                      }}
+                    >
+                      {product?.photos?.filter(
                         (photo) => photo?.variant == color?.name
-                      );
-                      if (findIndex != -1) setActiveImage(findIndex);
-                    }}
-                  >
-                    {product?.photos?.filter(
-                      (photo) => photo?.variant == color?.name
-                    )?.[0] && (
-                      <Image
-                        width={25}
-                        height={25}
-                        src={
-                          product?.photos?.filter(
-                            (photo) => photo?.variant == color?.name
-                          )?.[0]?.path
-                        }
-                        alt=""
-                      />
-                    )}
-                    {color?.name}
-                  </button>
-                ))}
+                      )?.[0] && (
+                        <Image
+                          width={25}
+                          height={25}
+                          src={
+                            product?.photos?.filter(
+                              (photo) => photo?.variant == color?.name
+                            )?.[0]?.path
+                          }
+                          alt=""
+                        />
+                      )}
+                      {color?.name}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <div>
-              <p className="text-gray-500">Size</p>
-            </div>
-            <div className="col-span-3">
-              <div className="flex gap-2 text-sm">
-                {sizes.map((size) => (
-                  <button
-                    onClick={() => setSelectedSize(size)}
-                    key={size}
-                    className={`border px-4 py-1 flex gap-2 ${
-                      selectedSize === size &&
-                      "border-orange-500 text-[#F4580E]"
-                    }`}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
+          )}
+
+          {product?.choice_options?.length != 0
+            ? product?.choice_options?.map((choice, key) => (
+                <div key={key} className="grid grid-cols-4 items-center gap-4">
+                  <div>
+                    <p className="text-gray-500">{choice?.title}</p>
+                  </div>
+                  <div className="col-span-3">
+                    <div className="flex gap-2 text-sm">
+                      {choice?.options.map((option) => (
+                        <button
+                          onClick={() => handleVariant(choice?.name, option)}
+                          key={option}
+                          className={`border px-4 py-1 flex gap-2 ${
+                            variant?.[choice?.name] &&
+                            variant?.[choice?.name]?.length != 0 &&
+                            variant?.[choice?.name] == option &&
+                            "border-orange-500 text-[#4F97A5]"
+                          }`}
+                        >
+                          {option}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))
+            : null}
           <div className="grid grid-cols-4 items-center gap-4">
             <div>
               <p className="text-gray-500">Quantity</p>
@@ -676,7 +732,7 @@ const ProductDetails = ({ product }) => {
             <button
               disabled={isLoading}
               onClick={handleAddToCart}
-              className="bg-orange-100 border border-orange-500 text-[#F4580E] px-8 py-2 flex justify-center items-center gap-2"
+              className="bg-orange-100 border border-orange-500 text-[#4F97A5] px-8 py-2 flex justify-center items-center gap-2"
             >
               {isLoading ? (
                 <>Adding...</>
@@ -700,10 +756,10 @@ const ProductDetails = ({ product }) => {
           <Divider />
           <div className="flex items-center gap-4 text-sm">
             <p className="flex items-center gap-2">
-              <span className="text-[#F4580E]">
+              <span className="text-[#4F97A5]">
                 <RiSecurePaymentLine size={24} />
               </span>
-              Leezo Guarantee
+              LeezoBD Guarantee
             </p>
             <p className="text-ray-500">
               Get the items you ordered or get your money back.

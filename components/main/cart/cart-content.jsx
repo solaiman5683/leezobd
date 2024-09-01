@@ -2,21 +2,22 @@
 
 import { useState } from "react";
 
+import { Checkbox, NumberInput } from "keep-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Minus, Plus } from "phosphor-react";
+import { FaAngleRight, FaCaretDown } from "react-icons/fa6";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   getCart,
   postCartProcess,
   postChangeQuantity,
   postRemoveFromCart,
 } from "@/hooks/frontend/cartApi";
-import { getCartHash } from "@/hooks/frontend/useCart";
-import { Checkbox, NumberInput } from "keep-react";
-import { useSession } from "next-auth/react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { Minus, Plus } from "phosphor-react";
 import toast from "react-hot-toast";
-import { FaAngleRight, FaCaretDown } from "react-icons/fa6";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useRouter } from "next/navigation";
+import { getCartHash } from "@/hooks/frontend/useCart";
+import { useSession } from "next-auth/react";
 
 const CartContent = () => {
   const [selectedItems, setSelectedItems] = useState([]);
@@ -119,7 +120,7 @@ const CartContent = () => {
     <>
       <div className="sm:block hidden">
         <div className="flex items-center border border-[#de9f82] my-4 gap-2 px-4 py-3 bg-[#fffdf8]">
-          <div className="max-w-10 h-auto ">
+          {/* <div className="max-w-10 h-auto ">
             <Image
               className="w-full h-full object-cover "
               src="/image/card/free.png"
@@ -131,7 +132,7 @@ const CartContent = () => {
           <h1 className="font-medium text-gray-600 text-sm">
             Stack Free Shipping Vouchers with Shopee and Shop Vouchers to enjoy
             maximum savings
-          </h1>
+          </h1> */}
         </div>
         <div className="flex items-center justify-between bg-white shadow py-3 px-6">
           <div className="w-2/4 flex items-center gap-4">
@@ -173,7 +174,7 @@ const CartContent = () => {
 
             {cart_items?.map((item) => (
               <div key={item?.id} className="border">
-                <div className="flex gap-2 bg-[#faf6eb] p-4 items-center text-sm">
+                {/* <div className="flex gap-2 bg-[#faf6eb] p-4 items-center text-sm">
                   <h1 className="border-2 rounded border-borderPrimary px-2 font-semibold text-primaryColor">
                     Free Gift
                   </h1>{" "}
@@ -181,7 +182,7 @@ const CartContent = () => {
                   <span className="flex items-center text-[18px] font-semibold text-primaryColor">
                     Add more <FaAngleRight />
                   </span>
-                </div>
+                </div> */}
                 <div className="flex items-center justify-between p-6">
                   <div className="w-2/4 flex items-center gap-4">
                     <Checkbox
@@ -402,7 +403,7 @@ const CartContent = () => {
           </div>
         ))}
 
-        <div className="flex items-center border my-3 shadow gap-2 px-4 py-3">
+        {/* <div className="flex items-center border my-3 shadow gap-2 px-4 py-3">
           <div className="max-w-10 h-auto ">
             <Image
               className="w-full h-full object-cover"
@@ -416,10 +417,10 @@ const CartContent = () => {
             Up to ৳1.99 off shipping on orders from ৳15.00{" "}
             <span className="text-blue-700">Learn more</span>
           </h1>
-        </div>
+        </div> */}
 
         <div className="bg-white shadow py-3 px-6 space-y-6">
-          <div className="flex justify-end items-center gap-4 border-b pb-3">
+          {/* <div className="flex justify-end items-center gap-4 border-b pb-3">
             <p>Platform Voucher</p>
             <div className="flex items-center border p-2 gap-3 min-w-[150px]">
               <input
@@ -428,7 +429,7 @@ const CartContent = () => {
                 className="w-full focus:outline-none"
               />
             </div>
-          </div>
+          </div> */}
           <div className="flex items-center justify-between">
             <div className="w-2/4 flex items-center gap-4">
               <Checkbox
@@ -476,7 +477,7 @@ const CartContent = () => {
             <div className="flex items-center">
               <p>
                 Total Amount:
-                <span className="text-[#F4580E] font-medium ml-2">
+                <span className="text-[#4F97A5] font-medium ml-2">
                   {cart?.data?.grand_total}
                 </span>
               </p>
@@ -509,7 +510,7 @@ const CartContent = () => {
             // }}
             />
 
-            <button
+            {/* <button
               // onClick={() => {
               //   if (selectedItems?.length === cartItems.length) {
               //     setSelectedItems([]);
@@ -523,12 +524,12 @@ const CartContent = () => {
                 Preferred
               </span>
               Wonderlust SG
-            </button>
+            </button> */}
           </div>
         </div>
         {cart_items?.map((item, i) => (
           <div key={i} className="border">
-            <div className="flex gap-2 bg-[#faf6eb] p-4 items-center text-sm">
+            {/* <div className="flex gap-2 bg-[#faf6eb] p-4 items-center text-sm">
               <button className="border rounded border-borderPrimary p-1 text-xs font-semibold text-primaryColor">
                 Free Gift
               </button>{" "}
@@ -539,7 +540,7 @@ const CartContent = () => {
               <span className="flex items-center lg:text-[18px] text-xs font-semibold text-primaryColor">
                 Add more <FaAngleRight />
               </span>
-            </div>
+            </div> */}
             <div className="flex items-center justify-between p-3">
               <div className="flex items-center gap-2.5">
                 <Checkbox
@@ -561,7 +562,7 @@ const CartContent = () => {
                 // }}
                 />
 
-                <div className="flex gap-3">
+                <div className="flex justify-between gap-3">
                   <div className="min-w-24 h-[70px]">
                     <Image
                       className="w-full h-full object-cover object-center "
@@ -737,9 +738,9 @@ const CartContent = () => {
         ))}
 
         <div className="bg-white fixed bottom-0 w-full z-10 shadow p-3 space-y-3">
-          <div className="flex justify-between items-center gap-4 border-b pb-3 w-full">
+          {/* <div className="flex justify-between items-center gap-4 border-b pb-3 w-full">
             <p className="text-xs text-primaryColor min-w-max">
-              Leezo Voucher
+              LeezoBD Voucher
             </p>
             <div className="flex items-center border p-2 gap-3 min-w-[100px]">
               <input
@@ -748,7 +749,7 @@ const CartContent = () => {
                 className="w-full focus:outline-none text-xs"
               />
             </div>
-          </div>
+          </div> */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Checkbox
@@ -794,13 +795,13 @@ const CartContent = () => {
               <div>
                 <p className="min-w-max text-xs">
                   Total :
-                  <span className="text-[#F4580E] font-medium ml-2">
+                  <span className="text-[#4F97A5] font-medium ml-2">
                     {cart?.data?.grand_total}
                   </span>
                 </p>
                 <p className="min-w-max text-[10px] text-right">
                   Saved :
-                  <span className="text-[#F4580E] font-medium ml-2">
+                  <span className="text-[#4F97A5] font-medium ml-2">
                     {(
                       selectedItems?.reduce(
                         (acc, item) => acc + item.price * item.quantity,
