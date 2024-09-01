@@ -41,10 +41,14 @@ jobs:
         with:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
-        
+
       - name: Remove cache
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }} cache rm
-        
+        run: |
+          if [ "${{ steps.detect-package-manager.outputs.manager }}" = "yarn" ]; then
+            yarn cache clean
+          elif [ "${{ steps.detect-package-manager.outputs.manager }}" = "npm" ]; then
+            npm cache clean --force
+          fi
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
@@ -52,12 +56,6 @@ jobs:
       - name: write environment variables to .env
         run: |
           touch .env
-          echo "BASE_API_URL=${{ secrets.BASE_API_URL }}" >> .env
-          echo "BASE_URL=${{ secrets.BASE_URL }}" >> .env
-          echo "BASE_ASSET_URL=${{ secrets.BASE_ASSET_URL }}" >> .env
-          echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env
-          echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" >> .env
-          echo "SYSTEM_KEY=${{ secrets.SYSTEM_KEY }}" >> .env
-          echo "CRYPTO_SECRET=${{ secrets.CRYPTO_SECRET }}" >> .env
+          echo "${{ secrets.leezo_env_secrets }}" >> .env
       - name: Start pm2 process
         run: pm2 startOrRestart ecosystem.config.js
