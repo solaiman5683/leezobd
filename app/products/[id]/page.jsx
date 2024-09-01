@@ -52,10 +52,10 @@ const ProductDetailsPage = () => {
           </Breadcrumb>
           <ProductDetails product={product?.data?.data?.[0]} />
           <BundleDeals />
-          {
-            product?.data?.data?.[0] && <SellerProfileIntro product={product?.data?.data?.[0]} />
-          }
-          
+          {product?.data?.data?.[0] && (
+            <SellerProfileIntro product={product?.data?.data?.[0]} />
+          )}
+
           <ProductSpecifications product={product?.data?.data?.[0]} />
           {/* <ProductRatingsMobile id={id} /> */}
           {/* <SameShopProducts /> */}
@@ -85,9 +85,9 @@ const ProductDetailsPage = () => {
               </div>
             </div>
           </div>
-          {
-            product?.data?.data?.[0] && <SellerProfileIntroMobile product={product?.data?.data?.[0]} />
-          }
+          {product?.data?.data?.[0] && (
+            <SellerProfileIntroMobile product={product?.data?.data?.[0]} />
+          )}
           {/* <SameShopProductsMobile /> */}
           <ProductSpecificationMobile product={product?.data?.data?.[0]} />
           {/* <ProductRatingsMobile /> */}
