@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -27,18 +27,8 @@ jobs:
           cache: ${{ steps.detect-package-manager.outputs.manager }}
 
       - name: Install Yarn (if required)
-        run: |
-          if [ "${{ steps.detect-package-manager.outputs.manager }}" = "yarn" ]; then
-            
-          fi
+        run: npm install -g yarn
 
-      - name: Remove cache
-        run: |
-          if [ "${{ steps.detect-package-manager.outputs.manager }}" = "yarn" ]; then
-            yarn cache clean
-          elif [ "${{ steps.detect-package-manager.outputs.manager }}" = "npm" ]; then
-            npm cache clean --force
-          fi
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
