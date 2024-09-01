@@ -1,5 +1,12 @@
+import { getToken } from "../auth/useAuth";
+
 export function getCartHash() {
     const local_storage = localStorage.getItem('cart_hash');
+    const token = getToken();
+
+    if (token) {
+        return undefined;
+    }
 
     if (local_storage == 'null') {
         localStorage.removeItem('cart_hash');
