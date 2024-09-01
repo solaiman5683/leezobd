@@ -22,7 +22,7 @@ const Category = () => {
   console.log(categoryId);
 
   const { data: get_specific_categories } = useQuery(
-    "get_specific_categories",
+    `get_specific_categories_${categoryId}`,
     () => getSpecificCategories(Number(categoryId))
   );
 
@@ -50,7 +50,7 @@ const Category = () => {
       </div>
 
       <div className="sm:hidden space-y-3">
-        <div className="bg-white flex justify-between items-center gap-5 py-3 px-4 shadow text-[#F4580E]">
+        <div className="bg-white flex justify-between items-center gap-5 py-3 px-4 shadow text-[#4F97A5]">
           <Link href="/">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -85,11 +85,11 @@ const Category = () => {
             <input
               type="text"
               placeholder="Category"
-              className="outline-none text-[#F4580E] text-sm placeholder:text-orange-400"
+              className="outline-none text-[#4F97A5] text-sm placeholder:text-orange-400"
             /> */}
             All Category
           </div>
-          <Link className="text-[#F4580E]" href="/cart">
+          <Link className="text-[#4F97A5]" href="/cart">
             <BsCart2 />
           </Link>
         </div>
@@ -98,7 +98,7 @@ const Category = () => {
             <li
               key={category?.id}
               className={`${
-                category?.id === Number(categoryId) ? "text-[#F4580E]" : ""
+                category?.id === Number(categoryId) ? "text-[#4F97A5]" : ""
               } flex-shrink-0`}
             >
               <Link
@@ -109,7 +109,6 @@ const Category = () => {
               </Link>
             </li>
           ))}
-          
         </ul>
 
         {/* <MallSection />

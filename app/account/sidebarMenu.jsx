@@ -49,7 +49,7 @@ const sidebarItems = [
   //   title: "Notifications",
   //   link: "/account/my-account",
   //   icon: (
-  //     <span className="text-[#F4580E]">
+  //     <span className="text-[#4F97A5]">
   //       <FaRegBell />
   //     </span>
   //   ),

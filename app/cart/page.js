@@ -1,5 +1,4 @@
 import CartContent from "@/components/main/cart/cart-content";
-import RelatedProduct from "@/components/main/cart/related-product";
 import Link from "next/link";
 import { LuArrowLeft } from "react-icons/lu";
 

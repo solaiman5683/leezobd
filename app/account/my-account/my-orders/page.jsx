@@ -14,20 +14,20 @@ const navItems = [
     href: "all",
   },
   {
-    title: "To Pay",
-    href: "to-pay",
+    title: "Pending",
+    href: "pending",
   },
   {
-    title: "To Ship",
-    href: "to-ship",
+    title: "Confirmed",
+    href: "confirmed",
   },
   {
-    title: "To Receive",
-    href: "to-receive",
+    title: "Picked Up",
+    href: "picked-up",
   },
   {
-    title: "To Review",
-    href: "to-review",
+    title: "On The Way",
+    href: "on-the-way",
   },
 ];
 
@@ -40,6 +40,32 @@ function MyOrdersPage() {
     purchaseHistory()
   );
 
+  const pending_orders =
+    orders?.data?.data?.length != 0
+      ? orders?.data?.data?.filter((item) => item.delivery_status == "Pending")
+      : [];
+
+  const confirmed_orders =
+    orders?.data?.data?.length != 0
+      ? orders?.data?.data?.filter(
+          (item) => item.delivery_status == "Confirmed"
+        )
+      : [];
+
+  const picked_up_orders =
+    orders?.data?.data?.length != 0
+      ? orders?.data?.data?.filter(
+          (item) => item.delivery_status == "Picked Up"
+        )
+      : [];
+
+  const on_the_way_orders =
+    orders?.data?.data?.length != 0
+      ? orders?.data?.data?.filter(
+          (item) => item.delivery_status == "On The Way"
+        )
+      : [];
+
   useEffect(() => {
     if (params) {
       setActiveNav(navItems.find((item) => item.href === params));
@@ -47,9 +73,8 @@ function MyOrdersPage() {
   }, [params]);
 
   useEffect(() => {
-    push(`/account/my-account/my-orders?type=${activeNav.href}`);
+    push(`/account/my-account/my-orders?type=${activeNav?.href}`);
   }, [activeNav, push]);
-
 
   return (
     <div>
@@ -83,7 +108,7 @@ function MyOrdersPage() {
         </div> */}
 
         <div className="flex-grow overflow-auto">
-          {activeNav?.href === "all" && (
+          {params === "all" && (
             <div className="py-2 space-y-3">
               {orders?.data?.data?.length === 0 && (
                 <div className="py-20 px-2 h-full flex flex-col items-center justify-center">
@@ -96,11 +121,63 @@ function MyOrdersPage() {
             </div>
           )}
 
-          {activeNav?.href !== "all" && (
+          {params === "pending" && (
+            <div className="py-2 space-y-3">
+              {pending_orders?.length === 0 && (
+                <div className="py-20 px-2 h-full flex flex-col items-center justify-center">
+                  There are no orders placed yet.
+                </div>
+              )}
+              {pending_orders?.map((order, index) => (
+                <MyOrderItem key={order} order={order} />
+              ))}
+            </div>
+          )}
+
+          {params === "confirmed" && (
+            <div className="py-2 space-y-3">
+              {confirmed_orders?.length === 0 && (
+                <div className="py-20 px-2 h-full flex flex-col items-center justify-center">
+                  There are no orders placed yet.
+                </div>
+              )}
+              {confirmed_orders?.map((order, index) => (
+                <MyOrderItem key={order} order={order} />
+              ))}
+            </div>
+          )}
+
+          {params === "picked-up" && (
+            <div className="py-2 space-y-3">
+              {picked_up_orders?.length === 0 && (
+                <div className="py-20 px-2 h-full flex flex-col items-center justify-center">
+                  There are no orders placed yet.
+                </div>
+              )}
+              {picked_up_orders?.map((order, index) => (
+                <MyOrderItem key={order} order={order} />
+              ))}
+            </div>
+          )}
+
+          {params === "on-the-way" && (
+            <div className="py-2 space-y-3">
+              {on_the_way_orders?.length === 0 && (
+                <div className="py-20 px-2 h-full flex flex-col items-center justify-center">
+                  There are no orders placed yet.
+                </div>
+              )}
+              {on_the_way_orders?.map((order, index) => (
+                <MyOrderItem key={order} order={order} />
+              ))}
+            </div>
+          )}
+
+          {/* {activeNav?.href !== "all" && (
             <div className="py-20 px-2 h-full flex flex-col items-center justify-center">
               There are no orders placed yet.
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>
@@ -136,7 +213,9 @@ export const MyOrderItem = ({ order }) => {
         </div>
 
         <div className="w-full">
-          <p className="text-xs">{order?.product_name}</p>
+          <p className="text-xs">
+            {order?.product_name} - {order?.variation}
+          </p>
           <p className="text-xs">{order?.product_price}</p>
           <div className="flex justify-between items-center w-fullmb-1">
             <p className="text-[11px] text-gray-400">Qty: {order?.quantity}</p>
@@ -149,7 +228,7 @@ export const MyOrderItem = ({ order }) => {
       <p className="text-right text-sm pb-3">
         {order?.product_count} {order?.product_count == 1 ? "item" : "items"},
         Total:{" "}
-        <span className="text-[#F4580E] font-semibold">
+        <span className="text-[#4F97A5] font-semibold">
           {" "}
           {order?.grand_total}
         </span>

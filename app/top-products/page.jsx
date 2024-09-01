@@ -7,7 +7,7 @@ import Link from "next/link";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { PiShoppingBagOpen } from "react-icons/pi";
 
-const FlashSalePage = () => {
+const TopProductsPage = () => {
   return (
     <>
       <div className="hidden sm:block">
@@ -80,4 +80,4 @@ const FlashSalePage = () => {
   );
 };
 
-export default FlashSalePage;
+export default TopProductsPage;

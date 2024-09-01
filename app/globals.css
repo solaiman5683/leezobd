@@ -119,26 +119,6 @@
 #top-slider .slick-next:before {
 	color: white;
 }
-#top-slider .slick-dots li button::before {
+#top-slider .slick-dots li button::before{
 	color: white;
-}
-
-/* Scrollbar */
-body,
-body * {
-	scrollbar-width: thin; /* For Firefox */
-	scrollbar-color: #888 #f5f5f5; /* For Firefox */
-}
-
-::-webkit-scrollbar {
-	width: 2px; /* Adjust this value to your preference */
-}
-
-::-webkit-scrollbar-track {
-	background-color: #f5f5f5;
-}
-
-::-webkit-scrollbar-thumb {
-	background-color: #888;
-	border-radius: 8px; /* Adjust this value to your preference */
 }

@@ -10,7 +10,7 @@ import { useCallback, useState } from "react";
 import toast from "react-hot-toast";
 import { FaArrowLeftLong, FaEnvelope, FaLock, FaUser } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
-import { FiHelpCircle } from "react-icons/fi";
+import { FiHelpCircle, FiPhone } from "react-icons/fi";
 import { MdOutlineFacebook } from "react-icons/md";
 import { useMutation } from "react-query";
 
@@ -47,8 +47,10 @@ const SignupPage = () => {
           router.push("/account/my-account");
         }
         setSignLoading(false);
+      } else if (data?.data?.message?.[0]) {
+        toast.error(data?.data?.message?.[0]);
       } else {
-        toast.error("Something went wrong");
+        toast.error(data?.message);
       }
     },
     onError: (error) => {
@@ -107,7 +109,7 @@ const SignupPage = () => {
               <div className="flex items-center">
                 <Link href="/" className="">
                   <Image
-                    src="/image/logo.png"
+                    src="/image/logo-white.png"
                     alt=""
                     width={150}
                     height={50}
@@ -118,7 +120,7 @@ const SignupPage = () => {
             </div>
           </div>
         </div>
-        <div className="bg-[#F4580E]">
+        <div className="bg-[#4F97A5]">
           <div
             className="p-16 max-w-6xl mx-auto bg-contain bg-left bg-no-repeat flex justify-end items-center"
             style={{
@@ -135,15 +137,15 @@ const SignupPage = () => {
                         fillRule="evenodd"
                         clipRule="evenodd"
                         d="M18 0H0v18h18V0zM3 15V3h12v12H3zM18 22H0v18h18V22zm-3 15H3V25h12v12zM40 0H22v18h18V0zm-3 15H25V3h12v12z"
-                        fill="#F4580E"
+                        fill="#4F97A5"
                       ></path>
                       <path
                         d="M37 37H22.5v3H40V22.5h-3V37z"
-                        fill="#F4580E"
+                        fill="#4F97A5"
                       ></path>
                       <path
                         d="M27.5 32v-8h-3v8h3zM33.5 32v-8h-3v8h3zM6 6h6v6H6zM6 28h6v6H6zM28 6h6v6h-6z"
-                        fill="#F4580E"
+                        fill="#4F97A5"
                       ></path>
                       <path
                         fill="#fff"
@@ -186,7 +188,7 @@ const SignupPage = () => {
                 <button
                   disabled={loading || signLoading}
                   type="submit"
-                  className="uppercase text-sm bg-[#F4580E] text-white w-full py-2 px-3"
+                  className="uppercase text-sm bg-[#4F97A5] text-white w-full py-2 px-3"
                 >
                   {loading || signLoading ? (
                     <div className="flex justify-center items-center">
@@ -219,12 +221,12 @@ const SignupPage = () => {
                 </div>
 
                 <p className="text-center text-sm">
-                  By signing up, you agree to Leezo&apos;s{" "}
-                  <Link href="/" className="text-[#F4580E]">
+                  By signing up, you agree to LeezoBD&apos;s{" "}
+                  <Link href="/" className="text-[#4F97A5]">
                     Terms of Service
                   </Link>{" "}
                   &{" "}
-                  <Link href="/" className="text-[#F4580E]">
+                  <Link href="/" className="text-[#4F97A5]">
                     Privacy Policy
                   </Link>
                 </p>
@@ -233,7 +235,7 @@ const SignupPage = () => {
                   Have an Account ?{" "}
                   <Link
                     href="/auth/login"
-                    className="font-semibold text-[#F4580E]"
+                    className="font-semibold text-[#4F97A5]"
                   >
                     Log In
                   </Link>
@@ -247,7 +249,7 @@ const SignupPage = () => {
       <div className="lg:hidden h-screen flex flex-col">
         <div className="flex items-center justify-between p-4 bg-white border-b">
           <div className="flex items-center gap-2 text-sm">
-            <button className="text-[#F4580E]" onClick={handleBack}>
+            <button className="text-[#4F97A5]" onClick={handleBack}>
               <FaArrowLeftLong />
             </button>
             Sign Up
@@ -311,7 +313,7 @@ const SignupPage = () => {
 
             <button
               type="submit"
-              className="text-center w-full p-2 text-sm bg-[#F4580E] text-white"
+              className="text-center w-full p-2 text-sm bg-[#4F97A5] text-white"
             >
               {loading || signLoading ? (
                 <div className="flex justify-center items-center">
@@ -346,12 +348,12 @@ const SignupPage = () => {
             </button>
           </form>
           <p className="text-center text-xs p-6">
-            By signing up, you agree to Leezo&apos;s{" "}
-            <Link href="/" className="text-[#F4580E]">
+            By signing up, you agree to LeezoBD&apos;s{" "}
+            <Link href="/" className="text-[#4F97A5]">
               Terms of Service
             </Link>{" "}
             &{" "}
-            <Link href="/" className="text-[#F4580E]">
+            <Link href="/" className="text-[#4F97A5]">
               Privacy Policy
             </Link>
           </p>

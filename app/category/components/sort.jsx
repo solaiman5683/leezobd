@@ -37,7 +37,7 @@ function Sort() {
 
             <div className="flex items-center gap-2">
                 <p className="text-sm text-gray-500">
-                    <span className="text-[#F4580E] font-bold text-base">
+                    <span className="text-[#4F97A5] font-bold text-base">
                         {currentPage}
                     </span> / {maxPage} 
                 </p>

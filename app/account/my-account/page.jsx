@@ -1,6 +1,5 @@
 "use client";
 
-import TrackPackages from "@/components/main/my-account/track-package-slider";
 import { getUserWishlist, purchaseHistory } from "@/hooks/auth/purchaseApi";
 import { getUserByToken, postUpdateProfileImage } from "@/hooks/user/user";
 import Link from "next/link";
@@ -8,16 +7,11 @@ import { useEffect, useState } from "react";
 import { BsCalendar2Check, BsChatLeftDots } from "react-icons/bs";
 import { CiCreditCard2 } from "react-icons/ci";
 import { FaUserEdit } from "react-icons/fa";
-import { FiHelpCircle } from "react-icons/fi";
 import { IoHomeOutline, IoSettingsOutline } from "react-icons/io5";
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { LuCalendarX2 } from "react-icons/lu";
-import { MdOutlineRateReview } from "react-icons/md";
-import { PiChats, PiKeyReturnLight } from "react-icons/pi";
-import { RiSecurePaymentLine } from "react-icons/ri";
-import { TbMessage2 } from "react-icons/tb";
+import { PiKeyReturnLight } from "react-icons/pi";
 import { useMutation, useQuery } from "react-query";
-import { Avatar } from "rsuite";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -39,11 +33,7 @@ const MyAccountPage = () => {
     purchaseHistory()
   );
 
-  const { data: wishlists } = useQuery("purchase_history", () =>
-    getUserWishlist(1)
-  );
-
-  // console.log(wishlists)
+  const { data: wishlists } = useQuery("wishlists", () => getUserWishlist());
   // console.log(orders?.data?.data.length)
 
   const {
@@ -113,7 +103,7 @@ const MyAccountPage = () => {
         Hello, {formdata.name}, Welcome to your account!
       </h1>
       <div className="sm:hidden">
-        <div className="bg-[#F4580E] text-white p-6">
+        <div className="bg-[#4F97A5] text-white p-6">
           <div className="flex justify-between items-start">
             <div className="flex items-center gap-3">
               <label htmlFor="file-input" className="cursor-pointer">
@@ -160,22 +150,25 @@ const MyAccountPage = () => {
           </div>
 
           <div className="grid grid-cols-3 gap-3 mt-6 text-white">
-            <div className="text-center">
+            <Link
+              href="/account/my-account/my-wishlist"
+              className="text-center"
+            >
               <div className="font-bold text-lg">
                 {wishlists?.data?.data.length}
               </div>
               <div className="text-sm">My Wishlist</div>
-            </div>
-            <div className="text-center">
+            </Link>
+            <Link href="/account/my-account/my-orders" className="text-center">
               <div className="font-bold text-lg">
                 {orders?.data?.data.length}
               </div>
               <div className="text-sm">My Orders</div>
-            </div>
-            <div className="text-center">
+            </Link>
+            <Link href="/account/my-account/vouchers" className="text-center">
               <div className="font-bold text-lg">0</div>
               <div className="text-sm">Vouchers</div>
-            </div>
+            </Link>
           </div>
         </div>
         <div className="space-y-3 p-4">
@@ -183,7 +176,7 @@ const MyAccountPage = () => {
             <p className="text-sm">My Orders</p>
             <Link
               href="/account/my-account/my-orders"
-              className="text-sm text-[#F4580E] flex items-center gap-1 hover:underline"
+              className="text-sm text-[#4F97A5] flex items-center gap-1 hover:underline"
             >
               View All
               <svg
@@ -204,32 +197,32 @@ const MyAccountPage = () => {
           </div>
           <div className="grid grid-cols-4 gap-3 my-3">
             <Link
-              href="/account/my-account/my-orders?type=to-pay"
+              href="/account/my-account/my-orders?type=pending"
               className="flex flex-col items-center space-y-0.5 justify-between"
             >
               <CiCreditCard2 size={30} />
-              <p className="text-sm">To Pay</p>
+              <p className="text-sm">Pending</p>
             </Link>
             <Link
-              href="/account/my-account/my-orders?type=to-ship"
+              href="/account/my-account/my-orders?type=confirmed"
               className="flex flex-col items-center space-y-0.5 justify-between"
             >
               <BsCalendar2Check size={20} className="mt-1.5" />
-              <p className="text-sm">To Ship</p>
+              <p className="text-sm">Confirmed</p>
             </Link>
             <Link
-              href="/account/my-account/my-orders?type=to-receive"
+              href="/account/my-account/my-orders?type=picked-up"
               className="flex flex-col items-center space-y-0.5 justify-between"
             >
               <LiaShippingFastSolid size={30} />
-              <p className="text-sm">To Receive</p>
+              <p className="text-sm">Picked Up</p>
             </Link>
             <Link
-              href="/account/my-account/my-orders?type=to-review"
+              href="/account/my-account/my-orders?type=on-the-way"
               className="flex flex-col items-center space-y-0.5 justify-between"
             >
               <BsChatLeftDots size={20} className="mt-1.5" />
-              <p className="text-sm">To Review</p>
+              <p className="text-sm">On the way</p>
             </Link>
           </div>
         </div>
@@ -250,7 +243,7 @@ const MyAccountPage = () => {
           </Link>
         </div>
         {/* <TrackPackages /> */}
-        <div className="space-y-3 p-4">
+        {/* <div className="space-y-3 p-4">
           <div className="flex items-center justify-between my-3">
             <p className="text-sm">My Services</p>
           </div>
@@ -291,7 +284,7 @@ const MyAccountPage = () => {
               <p className="text-sm">My Reviews</p>
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

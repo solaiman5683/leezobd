@@ -1,9 +1,6 @@
-import ChatBox from "@/components/common/chatbox";
-import CategoriesListing from "@/components/main/categories-listing";
 import CategoryContainer from "@/components/main/category-container";
 import DailyDiscover from "@/components/main/daily-discover";
 import FlashSale from "@/components/main/flash-sale";
-import MallContainer from "@/components/main/mall-container";
 import PopUpModal from "@/components/main/pop-up-modal";
 import QuickNav from "@/components/main/quick-nav";
 import SliderSection from "@/components/main/slider-section";
@@ -13,7 +10,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <main className="pb-20">
-      <PopUpModal/>
+      <PopUpModal />
       <div className="hidden sm:block">
         <div className="container p-6 space-y-6">
           <SliderSection />
@@ -42,8 +39,8 @@ export default function Home() {
             <DailyDiscover />
           </div>
         </section>
-        <CategoriesListing />
-        <ChatBox />
+        {/* <CategoriesListing /> */}
+        {/* <ChatBox /> */}
       </div>
 
       <div className="sm:hidden">
@@ -59,7 +56,7 @@ export default function Home() {
         <section className="bg-[#F5F5F5] py-3">
           <FlashSale />
           <TopProducts />
-          <MallContainer />
+          {/* <MallContainer /> */}
           <CategoryContainer />
           <DailyDiscover />
         </section>

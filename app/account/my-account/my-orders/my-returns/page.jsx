@@ -24,7 +24,7 @@ function MyReturns() {
                         Not satisfied with your purchase? You can initiate return request from my orders page.
                     </p>
 
-                    <Link href='/account/my-account/my-orders' className="border border-orange-500 w-full mt-6 text-sm p-2 rounded-md text-center text-[#F4580E] ">
+                    <Link href='/account/my-account/my-orders' className="border border-orange-500 w-full mt-6 text-sm p-2 rounded-md text-center text-[#4F97A5] ">
                         Check My Orders
                     </Link>
                 </div>

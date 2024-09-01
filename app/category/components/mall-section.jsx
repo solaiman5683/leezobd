@@ -27,7 +27,7 @@ const MallSection = () => {
         <div className="bg-white shadow-lg">
             <div className="lg:p-6 p-3 text-gray-700 border flex items-center justify-between">
                 <div className="flex gap-4 items-center">
-                    <p className="lg:px-4 lg:text-lg font-bold text-red-500 hover:underline flex items-center gap-1">Leezo Mall
+                    <p className="lg:px-4 lg:text-lg font-bold text-red-500 hover:underline flex items-center gap-1">LeezoBD Mall
                     </p>
                 </div>
                 <div>

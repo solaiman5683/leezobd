@@ -1,20 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 
 "use client";
-import { getCartHash } from "@/hooks/frontend/useCart";
 import { Divider } from "keep-react";
-import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
-import toast from "react-hot-toast";
 import { CiLock } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { FiHelpCircle, FiPhone } from "react-icons/fi";
 import { MdOutlineFacebook } from "react-icons/md";
+import { getSession, signIn, useSession } from "next-auth/react";
+import toast from "react-hot-toast";
+import { getCartHash } from "@/hooks/frontend/useCart";
 import image from "/public/image/login.png";
 
 const LoginPage = () => {
@@ -98,7 +98,7 @@ const LoginPage = () => {
               <div className="flex items-center">
                 <Link href="/" className="">
                   <Image
-                    src="/image/logo.png"
+                    src="/image/logo-white.png"
                     alt=""
                     width={150}
                     height={50}
@@ -109,7 +109,7 @@ const LoginPage = () => {
             </div>
           </div>
         </div>
-        <div className="bg-[#F4580E]">
+        <div className="bg-[#4F97A5]">
           <div
             className="p-16 max-w-6xl mx-auto bg-contain bg-left bg-no-repeat flex justify-end items-center"
             style={{
@@ -136,15 +136,15 @@ const LoginPage = () => {
                             fillRule="evenodd"
                             clipRule="evenodd"
                             d="M18 0H0v18h18V0zM3 15V3h12v12H3zM18 22H0v18h18V22zm-3 15H3V25h12v12zM40 0H22v18h18V0zm-3 15H25V3h12v12z"
-                            fill="#F4580E"
+                            fill="#4F97A5"
                           ></path>
                           <path
                             d="M37 37H22.5v3H40V22.5h-3V37z"
-                            fill="#F4580E"
+                            fill="#4F97A5"
                           ></path>
                           <path
                             d="M27.5 32v-8h-3v8h3zM33.5 32v-8h-3v8h3zM6 6h6v6H6zM6 28h6v6H6zM28 6h6v6h-6z"
-                            fill="#F4580E"
+                            fill="#4F97A5"
                           ></path>
                           <path
                             fill="#fff"
@@ -171,16 +171,16 @@ const LoginPage = () => {
                             width="37"
                             height="28"
                             rx="2.5"
-                            stroke="#F4580E"
+                            stroke="#4F97A5"
                             strokeWidth="3"
                           ></rect>
                           <path
-                            stroke="#F4580E"
+                            stroke="#4F97A5"
                             strokeWidth="3"
                             d="M22 38.5h11"
                           ></path>
                           <path
-                            stroke="#F4580E"
+                            stroke="#4F97A5"
                             strokeWidth="10"
                             d="M21 29v9"
                           ></path>
@@ -190,7 +190,7 @@ const LoginPage = () => {
                           ></path>
                           <path
                             d="M10.997 16.545l-2.76-.782.519-1.591 2.733 1.098-.176-3.067h1.723l-.176 3.129 2.663-1.081.519 1.608-2.813.783 1.846 2.338-1.397.993-1.6-2.567-1.582 2.479-1.397-.95 1.898-2.39zm8.156 0l-2.76-.782.52-1.591 2.732 1.098-.175-3.067h1.722l-.175 3.129 2.663-1.081.518 1.608-2.812.783 1.845 2.338-1.397.993-1.6-2.567-1.582 2.479-1.397-.95 1.898-2.39zm8.157 0l-2.76-.782.518-1.591 2.734 1.098-.176-3.067h1.723l-.176 3.129 2.663-1.081.519 1.608-2.813.783 1.846 2.338-1.398.993-1.6-2.567-1.581 2.479-1.398-.95 1.899-2.39z"
-                            fill="#F4580E"
+                            fill="#4F97A5"
                           ></path>
                         </g>
                         <defs>
@@ -266,7 +266,7 @@ const LoginPage = () => {
                   <div>
                     <button
                       type="submit"
-                      className="uppercase text-sm bg-[#F4580E] text-white w-full py-2 px-3"
+                      className="uppercase text-sm bg-[#4F97A5] text-white w-full py-2 px-3"
                     >
                       {loading ? "Loading..." : "Login"}
                     </button>
@@ -302,10 +302,10 @@ const LoginPage = () => {
                   </div>
 
                   <p className="text-center text-sm text-gray-500">
-                    New to Leezo ?{" "}
+                    New to LeezoBD ?{" "}
                     <Link
                       href="/auth/register"
-                      className="font-semibold text-[#F4580E]"
+                      className="font-semibold text-[#4F97A5]"
                     >
                       Sign Up
                     </Link>
@@ -319,14 +319,14 @@ const LoginPage = () => {
                     alt=""
                   />
                   <p className="text-lg text-center">
-                    Scan QR code with Leezo App
+                    Scan QR code with LeezoBD App
                   </p>
                   <p className="text-blue-600 text-center">How to Scan</p>
                   <p className="text-center text-sm text-gray-500">
-                    New to Leezo ?{" "}
+                    New to LeezoBD ?{" "}
                     <Link
                       href="/auth/register"
-                      className="font-semibold text-[#F4580E]"
+                      className="font-semibold text-[#4F97A5]"
                     >
                       Sign Up
                     </Link>
@@ -341,7 +341,7 @@ const LoginPage = () => {
       <div className="lg:hidden h-screen flex flex-col">
         <div className="flex items-center justify-between p-4 bg-white border-b">
           <div className="flex items-center gap-2 text-sm">
-            <button className="text-[#F4580E]" onClick={handleBack}>
+            <button className="text-[#4F97A5]" onClick={handleBack}>
               <FaArrowLeftLong />
             </button>
             Login
@@ -438,7 +438,7 @@ const LoginPage = () => {
                 </div>
                 <button
                   type="submit"
-                  className="text-center w-full p-2 text-sm bg-[#F4580E] text-white"
+                  className="text-center w-full p-2 text-sm bg-[#4F97A5] text-white"
                 >
                   {loading ? "Loading..." : "Login"}
                 </button>

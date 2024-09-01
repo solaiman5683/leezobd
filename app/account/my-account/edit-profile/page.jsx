@@ -286,7 +286,7 @@ const MyAccountPage = () => {
         </div>
       </div>
       <div className="md:hidden">
-        <div className="flex bg-[#F4580E] items-center justify-between px-4 text-white py-3">
+        <div className="flex bg-[#4F97A5] items-center justify-between px-4 text-white py-3">
           <h1 className="text-lg">Edit Account</h1>
           <Link href={"/account/my-account"}>
             <button className="flex items-center justify-center">

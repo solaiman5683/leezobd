@@ -45,7 +45,7 @@ const CategoryProducts = ({ id }) => {
               <li
                 key={category?.id}
                 className={`${
-                  category?.id === Number(id) ? "text-[#F4580E]" : ""
+                  category?.id === Number(id) ? "text-[#4F97A5]" : ""
                 }`}
               >
                 <Link

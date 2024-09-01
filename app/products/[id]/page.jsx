@@ -31,11 +31,8 @@ const ProductDetailsPage = () => {
   const [showMobileBuyNow, setShowMobileBuyNow] = useState(false);
   const [quantity, setQuantity] = useState(0);
 
-  if (isLoading) return <div className="text-center py-10">Loading...</div>;
-
   if (!product?.data?.data?.[0] && !isLoading)
     return <div>Product not found</div>;
-  console.log(product?.data?.data?.[0]?.name);
 
   return (
     <div className="bg-gray-100 w-full overflow-hidden">
@@ -44,7 +41,7 @@ const ProductDetailsPage = () => {
           <Breadcrumb
             icon={
               <Link href="/" className="text-sm">
-                Leezo
+                LeezoBD
               </Link>
             }
             className="max-w-full "
@@ -55,7 +52,10 @@ const ProductDetailsPage = () => {
           </Breadcrumb>
           <ProductDetails product={product?.data?.data?.[0]} />
           <BundleDeals />
-          <SellerProfileIntro product={product?.data?.data?.[0]} />
+          {
+            product?.data?.data?.[0] && <SellerProfileIntro product={product?.data?.data?.[0]} />
+          }
+          
           <ProductSpecifications product={product?.data?.data?.[0]} />
           {/* <ProductRatingsMobile id={id} /> */}
           {/* <SameShopProducts /> */}
@@ -72,12 +72,12 @@ const ProductDetailsPage = () => {
           <FreeShipping product={product?.data?.data?.[0]} />
           <div className="bg-yellow-50 p-2">
             <div className="flex gap-2">
-              <span className="text-[#F4580E] mt-0.5">
+              <span className="text-[#4F97A5] mt-0.5">
                 <RiSecurePaymentLine size={18} />
               </span>
               <div>
                 <p className="text-green-400 font-semibold text-sm">
-                  Leezo Guarantee
+                  LeezoBD Guarantee
                 </p>
                 <p className="text-ray-500  text-xs">
                   Get the items you ordered or get your money back.
@@ -85,14 +85,16 @@ const ProductDetailsPage = () => {
               </div>
             </div>
           </div>
-          <SellerProfileIntroMobile product={product?.data?.data?.[0]} />
+          {
+            product?.data?.data?.[0] && <SellerProfileIntroMobile product={product?.data?.data?.[0]} />
+          }
           {/* <SameShopProductsMobile /> */}
           <ProductSpecificationMobile product={product?.data?.data?.[0]} />
           {/* <ProductRatingsMobile /> */}
           {/* <Breadcrumb
             icon={
               <Link href="/" className="text-xs">
-                Leezo
+                LeezoBD
               </Link>
             }
             className="max-w-full flex-wrap gap-0.5"

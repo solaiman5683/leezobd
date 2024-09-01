@@ -19,7 +19,7 @@ const ShopByBrandSection = () => {
                             OnePlus
                         </p>
                         <p className="lg:text-sm text-xs text-gray-500 min-w-max">
-                            From <span className="text-[#F4580E] font-bold">$ 60.00</span>
+                            From <span className="text-[#4F97A5] font-bold">$ 60.00</span>
                         </p>
                     </div>
                 </div>
@@ -30,7 +30,7 @@ const ShopByBrandSection = () => {
                             Oppo
                         </p>
                         <p className="lg:text-sm text-xs text-gray-500 min-w-max">
-                            From <span className="text-[#F4580E] font-bold">$ 60.00</span>
+                            From <span className="text-[#4F97A5] font-bold">$ 60.00</span>
                         </p>
                     </div>
                 </div>
@@ -41,7 +41,7 @@ const ShopByBrandSection = () => {
                             Huawei
                         </p>
                         <p className="lg:text-sm text-xs text-gray-500 min-w-max">
-                            From <span className="text-[#F4580E] font-bold">$ 60.00</span>
+                            From <span className="text-[#4F97A5] font-bold">$ 60.00</span>
                         </p>
                     </div>
                 </div>
@@ -52,7 +52,7 @@ const ShopByBrandSection = () => {
                             Xiaomi
                         </p>
                         <p className="lg:text-sm text-xs text-gray-500 min-w-max">
-                            From <span className="text-[#F4580E] font-bold">$ 60.00</span>
+                            From <span className="text-[#4F97A5] font-bold">$ 60.00</span>
                         </p>
                     </div>
                 </div>
@@ -63,7 +63,7 @@ const ShopByBrandSection = () => {
                             Samsung
                         </p>
                         <p className="lg:text-sm text-xs text-gray-500 min-w-max">
-                            From <span className="text-[#F4580E] font-bold">$ 60.00</span>
+                            From <span className="text-[#4F97A5] font-bold">$ 60.00</span>
                         </p>
                     </div>
                 </div>

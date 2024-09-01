@@ -25,6 +25,7 @@ const Checkout = () => {
   const [payment_name, setPaymentName] = useState("Cash On Delivery");
   const [number, setNumber] = useState("");
   const [trx_id, setTrxId] = useState("");
+  const [message, setMessage] = useState("");
   const session = useSession();
 
   const router = useRouter();
@@ -65,12 +66,10 @@ const Checkout = () => {
     {
       onSuccess: (data) => {
         toast.dismiss();
-        if (data?.data?.message) {
-          toast.success(data?.data?.message);
-        } else {
-          toast.error(data?.message);
-        }
+        toast.success("Product removed from cart");
         refetch();
+        summary_refetch();
+
 
         queryClient.invalidateQueries("cart_count");
       },
@@ -101,7 +100,7 @@ const Checkout = () => {
       return;
     }
 
-    checkout({ payment_type, payment_name, number, trx_id });
+    checkout({ payment_type, payment_name, number, trx_id, message });
   };
 
   useEffect(() => {
@@ -250,7 +249,7 @@ const Checkout = () => {
                             onClick={() => deleteCartItem(item.id)}
                             className="text-gray-800 lg:text-sm text-xs cursor-pointer"
                           >
-                            deleted
+                            Delete
                           </p>
                         </td>
                       </tr>
@@ -268,6 +267,7 @@ const Checkout = () => {
                 </p>
                 <input
                   type="text"
+                  onChange={(e) => setMessage(e.target.value)}
                   placeholder="Please leave a message."
                   className="border-2 border-gray-300 p-2 w-full text-sm"
                 />
@@ -311,9 +311,9 @@ const Checkout = () => {
                 }}
                 className={`px-4 py-1.5 border-2 ${
                   payment_type === "cash_on_delivery"
-                    ? "bg-[#F4580E] border-gray-300 text-white"
+                    ? "bg-[#4F97A5] border-gray-300 text-white"
                     : "border-gray-300"
-                } text-[#F4580E] text-xs min-w-max whitespace-nowrap hover:bg-[#F4580E] hover:text-white`}
+                } text-[#4F97A5] text-xs min-w-max whitespace-nowrap hover:bg-[#4F97A5] hover:text-white`}
               >
                 Cash On Delivery
               </button>
@@ -324,9 +324,9 @@ const Checkout = () => {
                 }}
                 className={`px-4 py-1.5 border-2 ${
                   payment_type === "manual_payment_bkash"
-                    ? "bg-[#F4580E] border-gray-300 text-white"
+                    ? "bg-[#4F97A5] border-gray-300 text-white"
                     : "border-gray-300"
-                } text-[#F4580E] text-xs min-w-max whitespace-nowrap hover:bg-[#F4580E] hover:text-white`}
+                } text-[#4F97A5] text-xs min-w-max whitespace-nowrap hover:bg-[#4F97A5] hover:text-white`}
               >
                 Bkash
               </button>
@@ -338,9 +338,9 @@ const Checkout = () => {
                 }}
                 className={`px-4 py-1.5 border-2 ${
                   payment_type === "manual_payment_nagad"
-                    ? "bg-[#F4580E] border-gray-300 text-white"
+                    ? "bg-[#4F97A5] border-gray-300 text-white"
                     : "border-gray-300"
-                } text-[#F4580E] text-xs min-w-max whitespace-nowrap hover:bg-[#F4580E] hover:text-white`}
+                } text-[#4F97A5] text-xs min-w-max whitespace-nowrap hover:bg-[#4F97A5] hover:text-white`}
               >
                 Nagad
               </button>
@@ -349,9 +349,9 @@ const Checkout = () => {
                 onClick={() => setPaymentType("manual_payment_rocket")}
                 className={`px-4 py-1.5 border-2 ${
                   payment_type === "manual_payment_rocket"
-                    ? "bg-[#F4580E] border-gray-300 text-white"
+                    ? "bg-[#4F97A5] border-gray-300 text-white"
                     : "border-gray-300"
-                } text-[#F4580E] text-xs min-w-max whitespace-nowrap hover:bg-[#F4580E] hover:text-white`}
+                } text-[#4F97A5] text-xs min-w-max whitespace-nowrap hover:bg-[#4F97A5] hover:text-white`}
               >
                 Rocket
               </button>
@@ -454,7 +454,9 @@ const Checkout = () => {
                       </h1>
                     </div>
                     <div>
-                      <p className="text-gray-800 text-xs">Enter Your Rocket Number</p>
+                      <p className="text-gray-800 text-xs">
+                        Enter Your Rocket Number
+                      </p>
                       <input
                         type="text"
                         name="number"
@@ -486,39 +488,39 @@ const Checkout = () => {
             <div className="space-y-3 text-sm">
               <div className="flex justify-between">
                 <p>Merchandise Subtotal:</p>
-                <p>{summary?.data?.sub_total}</p>
+                <p>{summary?.data?.sub_total ? summary?.data?.sub_total : 0}</p>
               </div>
               <div className="flex justify-between">
                 <p>Shipping Total:</p>
-                <p>{summary?.data?.shipping_cost}</p>
+                <p>{summary?.data?.shipping_cost ? summary?.data?.shipping_cost : 0}</p>
               </div>
               {summary?.data?.coupon_applied && (
                 <div className="flex justify-between">
                   <p>Voucher Discount:</p>
-                  <p>{summary?.data?.coupon_discount}</p>
+                  <p>{summary?.data?.coupon_discount ? summary?.data?.coupon_discount : 0}</p>
                 </div>
               )}
               <div className="flex justify-between">
                 <p>Payment Discount:</p>
-                <p>{summary?.data?.discount}</p>
+                <p>{summary?.data?.discount ? summary?.data?.discount : 0}</p>
               </div>
               <div className="flex justify-between">
                 <p>Total Payment:</p>
-                <p className="text-[#F4580E] text-xl">
-                  {summary?.data?.grand_total}
+                <p className="text-[#4F97A5] text-xl">
+                  {summary?.data?.grand_total ? summary?.data?.grand_total : 0}
                 </p>
               </div>
-              <p className="text-right text-gray-400 text-xs flex gap-3 items-center justify-end">
+              {/* <p className="text-right text-gray-400 text-xs flex gap-3 items-center justify-end">
                 GST included, where applicable.
                 <AiOutlineQuestionCircle />
-              </p>
+              </p> */}
 
               <button
                 disabled={
                   addresses?.data?.data?.length == 0 || isAddressLoading
                 }
                 onClick={handlePlaceOrder}
-                className="w-full bg-[#F4580E] text-white text-sm py-2.5 rounded-md"
+                className="w-full bg-[#4F97A5] text-white text-sm py-2.5 rounded-md"
               >
                 {isLoading ? "Ordering..." : "Place Order"}
               </button>

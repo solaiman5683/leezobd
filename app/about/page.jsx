@@ -1,11 +1,12 @@
+import React from "react";
 
 const AboutPage = () => {
   return (
     <div className="container px-4 md:py-10 text-pretty pb-24">
-      <h1 className="text-lg font-medium pb-3">About Leezo</h1>
+      <h1 className="text-lg font-medium pb-3">About LeezoBD</h1>
       <p>
-        Welcome to Leezo, your one-stop online shopping destination in
-        Bangladesh. At Leezo, we strive to provide our customers with a
+        Welcome to LeezoBD, your one-stop online shopping destination in
+        Bangladesh. At LeezoBD, we strive to provide our customers with a
         seamless and enjoyable shopping experience, offering a wide range of
         high-quality products at competitive prices.
       </p>
@@ -44,7 +45,7 @@ const AboutPage = () => {
           reach you quickly and safely.
         </li>
       </ol>
-      <h1 className="text-lg text-center md:text-left pb-3 pt-5">Thank you for choosing Leezo. Happy shopping!</h1>
+      <h1 className="text-lg text-center md:text-left pb-3 pt-5">Thank you for choosing LeezoBD. Happy shopping!</h1>
 
     </div>
   );

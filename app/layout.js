@@ -20,7 +20,7 @@ import AuthenticateSessionProvider from "@/components/AuthenticateSessionProvide
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Leezo - Online shopping in bangladesh.",
+  title: "LeezoBD - Online shopping in bangladesh.",
 };
 
 export default function RootLayout({ children }) {
