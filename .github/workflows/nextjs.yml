@@ -41,10 +41,6 @@ jobs:
         with:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
-      - name: Setup pm2
-        uses: pm2/setup-pm2@v2
-        with:
-          pm2-ecosystem-file: ecosystem.config.js
         
       - name: Remove cache
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }} cache rm
